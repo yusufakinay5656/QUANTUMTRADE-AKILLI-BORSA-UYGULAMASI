@@ -1,0 +1,248 @@
+<!-- ✅ index.html -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ana Sayfa | QuantumTrade</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    /* (stil kodları aynı, değişiklik yok) */
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #000;
+      color: #ffd700;
+    }
+    header {
+      background-color: #111;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #ffd700;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ffd700;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      gap: 20px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #ffd700;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    nav a:hover, nav a:focus, nav a:active, nav a:visited {
+      color: #ffd700;
+      border-bottom: 2px solid #ffd700;
+      outline: none;
+    }
+    nav a.active {
+      color: #ffd700;
+      border-bottom: 2px solid #ffd700;
+    }
+    .news-ticker {
+      background: #222;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 1px solid #444;
+      border-bottom: 1px solid #444;
+    }
+    .ticker-content {
+      display: inline-block;
+      padding: 10px 0;
+      animation: slide 15s linear infinite;
+      color: #ffd700;
+    }
+    @keyframes slide {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+    main {
+      padding: 40px 20px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #111;
+      border-top: 2px solid #ffd700;
+      color: #888;
+    }
+    .section {
+      margin: 50px auto;
+      max-width: 1000px;
+      padding: 30px;
+      border: 1px solid #333;
+      border-radius: 10px;
+      background-color: #111;
+    }
+    .market-dashboard {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      font-size: 1.2rem;
+    }
+    .coin {
+      background: #000;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid #444;
+    }
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .testimonial {
+      background: #000;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #444;
+      font-size: 0.9rem;
+    }
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+    .login-section {
+      max-width: 400px;
+      margin: 60px auto;
+      background: #111;
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid #444;
+      text-align: center;
+    }
+    .login-section input,
+    .login-section button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+    }
+    .login-section input {
+      background: #000;
+      border: 1px solid #333;
+      color: #ffd700;
+    }
+    .login-section button {
+      background: #ffd700;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .login-section button:hover {
+      background: #fff;
+    }
+    .login-section .links {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+    .login-section .links a {
+      color: #ffd700;
+      text-decoration: none;
+    }
+    .login-section .links a:hover {
+      text-decoration: underline;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="page-index">
+  <header>
+    <div class="logo">
+      <img src="8ebfb1e03919fc6bae62be4740f0282e.jpg" alt="QuantumTrade Logo">
+      <span style="color: #ffd700;">QuantumTrade</span> <span class="mission">"The world is yours"</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Ana Sayfa</a></li>
+        <li><a href="piyasa.html">Piyasa</a></li>
+        <li><a href="profilim.html">Profilim</a></li>
+        <li><a href="satin-al.html">Satın Al</a></li>
+        <li><a href="login.html">Giriş Yap</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="news-ticker">
+    <div class="ticker-content">
+      📢 QuantumTrade'e Hoş Geldiniz! • 🚀 Anlık piyasa analizleri • 💼 Güvenli yatırımın adresi...
+    </div>
+  </div>
+
+  <main>
+    <div class="section">
+      <h2 style="text-align:center;">Anlık Piyasa Verileri</h2>
+      <div class="market-dashboard">
+        <div class="coin"><strong>BTC:</strong> $68,200</div>
+        <div class="coin"><strong>ETH:</strong> $3,200</div>
+        <div class="coin"><strong>XRP:</strong> $0.62</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 style="text-align:center;">Yatırımcı Yorumları</h2>
+      <div class="testimonials">
+        <div class="testimonial">"QuantumTrade ile portföyüm %120 arttı!"</div>
+        <div class="testimonial">"Arayüz sade, kullanım kolay. Harika!"</div>
+        <div class="testimonial">"Yatırımlarım artık emin ellerde."</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 style="text-align:center;">Güvenliğiniz Bizim İçin Önemli</h2>
+      <p style="text-align:center;">256-bit SSL • 2 Faktörlü Kimlik Doğrulama • Yerli Sunucular</p>
+    </div>
+
+    <div class="section">
+      <h2 style="text-align:center;">Başarı Sayılarımız</h2>
+      <div class="stats">
+        <div><strong>25.000+</strong><br> Yatırımcı</div>
+        <div><strong>$12M+</strong><br> İşlem Hacmi</div>
+        <div><strong>%98</strong><br> Müşteri Memnuniyeti</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 QuantumTrade • Tüm Hakları Saklıdır</p>
+  </footer>
+
+  <script>
+    const links = document.querySelectorAll("nav a");
+    const currentPage = location.pathname.split("/").pop();
+    links.forEach(link => {
+      if (link.getAttribute("href") === currentPage) {
+        link.classList.add("active");
+      }
+    });
+  </script>
+</body>
+</html>

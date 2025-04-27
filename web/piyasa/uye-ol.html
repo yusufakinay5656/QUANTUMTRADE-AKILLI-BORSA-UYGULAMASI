@@ -1,0 +1,115 @@
+<!-- ✅ uye-ol.html -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Üye Ol | QuantumTrade</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #000;
+      color: #ffd700;
+    }
+    header {
+      background-color: #111;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #ffd700;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ffd700;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    main {
+      padding: 60px 20px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .register-section {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #111;
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid #444;
+      text-align: center;
+    }
+    .register-section input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #000;
+      color: #ffd700;
+    }
+    .register-section button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #ffd700;
+      color: #000;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .register-section button:hover {
+      background: #fff;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #111;
+      border-top: 2px solid #ffd700;
+      color: #888;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="page-register">
+  <header>
+    <div class="logo">
+      <img src="8ebfb1e03919fc6bae62be4740f0282e.jpg" alt="QuantumTrade Logo">
+      <span style="color: #ffd700;">QuantumTrade</span> <span class="mission">"The world is yours"</span>
+    </div>
+    <a href="login.html" style="color: #ffd700; text-decoration: none; font-size: 16px;">← Geri</a>
+  </header>
+
+  <main>
+    <h2 style="text-align:center">Hızlı Üye Ol</h2>
+    <div class="register-section">
+      <form>
+        <input type="text" placeholder="İsim" required />
+        <input type="text" placeholder="Soyisim" required />
+        <input type="text" placeholder="Kullanıcı Adı" required />
+        <input type="email" placeholder="E-posta" required />
+        <input type="password" placeholder="Şifre" required />
+        <button type="submit">Kaydol</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 QuantumTrade • Tüm Hakları Saklıdır</p>
+  </footer>
+</body>
+</html>

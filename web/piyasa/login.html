@@ -1,0 +1,154 @@
+<!-- ✅ login.html -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giriş Yap | QuantumTrade</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #000;
+      color: #ffd700;
+    }
+    header {
+      background-color: #111;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #ffd700;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ffd700;
+    }
+    .logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      gap: 20px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #ffd700;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    nav a:hover, nav a:focus, nav a:active, nav a:visited {
+      color: #ffd700;
+      border-bottom: 2px solid #ffd700;
+      outline: none;
+    }
+    nav a.active {
+      color: #ffd700;
+      border-bottom: 2px solid #ffd700;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .login-box {
+      background-color: #111;
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid #444;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    .login-box h2 {
+      margin-bottom: 25px;
+      font-size: 2rem;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #000;
+      color: #ffd700;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #ffd700;
+      color: #000;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .login-box button:hover {
+      background: #fff;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #111;
+      border-top: 2px solid #ffd700;
+      color: #888;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="page-login">
+  <header>
+    <div class="logo">
+      <img src="8ebfb1e03919fc6bae62be4740f0282e.jpg" alt="QuantumTrade Logo">
+      <span style="color: #ffd700;">QuantumTrade</span> <span class="mission">"The world is yours"</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="piyasa.html">Piyasa</a></li>
+        <li><a href="profilim.html">Profilim</a></li>
+        <li><a href="satin-al.html">Satın Al</a></li>
+        <li><a href="login.html" class="active">Giriş</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="login-box">
+      <h2>Giriş Yap</h2>
+      <form>
+        <input type="text" placeholder="Kullanıcı Adı" required />
+        <input type="password" placeholder="Şifre" required />
+        <button type="submit">Giriş Yap</button>
+      </form>
+      <div class="links" style="display: flex; justify-content: space-between; margin-top: 15px;">
+        <a href="sifre-kurtar.html" style="color: #ffd700; text-decoration: none;">Şifremi Unuttum</a>
+        <a href="uye-ol.html" style="color: #ffd700; text-decoration: none;">Üye Ol</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 QuantumTrade • Tüm Hakları Saklıdır</p>
+  </footer>
+</body>
+</html>
