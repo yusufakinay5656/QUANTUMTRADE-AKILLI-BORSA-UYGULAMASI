@@ -1,3 +1,6 @@
+# QuantumTrade Projesi Başladı! 🚀
+
+
 # quantumtrade
 
 A new Flutter project.
