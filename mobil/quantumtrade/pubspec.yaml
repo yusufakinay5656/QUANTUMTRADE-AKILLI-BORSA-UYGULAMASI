@@ -22,6 +22,9 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
+
+# QuantumTrade için pubspec güncellendi - 3. Commit
+
   uses-material-design: true
   assets:
     - assets/images/logo.jpg
