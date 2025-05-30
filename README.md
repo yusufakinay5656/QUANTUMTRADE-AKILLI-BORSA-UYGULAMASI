@@ -27,8 +27,8 @@ QuantumTrade, yapay zeka destekli, biyometrik güvenlik özellikli ve kullanıc�
 
 1. Repoyu klonlayın:
 ```bash
-git clone https://github.com/[kullanıcı-adınız]/quantumtrade.git
-cd quantumtrade
+git clone https://github.com/yusufakinay5656/QUANTUMTRADE-AKILLI-BORSA-UYGULAMASI.git
+cd QUANTUMTRADE-AKILLI-BORSA-UYGULAMASI
 ```
 
 2. Backend bağımlılıklarını yükleyin:
@@ -64,6 +64,6 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 ## 📞 İletişim
 
-Proje Sahibi - [@linkedin-profiliniz](https://linkedin.com/in/profiliniz)
+Proje Sahibi - [Yusuf Akınay](https://github.com/yusufakinay5656)
 
-Proje Linki: [https://github.com/[kullanıcı-adınız]/quantumtrade](https://github.com/[kullanıcı-adınız]/quantumtrade) 
+Proje Linki: [https://github.com/yusufakinay5656/QUANTUMTRADE-AKILLI-BORSA-UYGULAMASI](https://github.com/yusufakinay5656/QUANTUMTRADE-AKILLI-BORSA-UYGULAMASI) 
