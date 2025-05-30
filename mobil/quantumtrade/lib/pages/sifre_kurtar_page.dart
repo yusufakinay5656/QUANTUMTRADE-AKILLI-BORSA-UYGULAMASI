@@ -43,7 +43,7 @@ class SifreKurtarPage extends StatelessWidget {
           _navItem("Ana Sayfa", onTap: () => Navigator.pushNamed(context, '/')),
           _navItem("Piyasa", onTap: () => Navigator.pushNamed(context, '/piyasa')),
           _navItem("Profilim", onTap: () => Navigator.pushNamed(context, '/profilim')),
-          _navItem("Satın Al", onTap: () => Navigator.pushNamed(context, '/satin-al')),
+          _navItem("AI Asistan", onTap: () => Navigator.pushNamed(context, '/ai-asistan')),
         ],
       ),
       body: SingleChildScrollView(

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Profilim | QuantumTrade</title>
+  <title>Profilim - QuantumTrade</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
@@ -56,6 +56,58 @@
     nav a.active {
       color: #ffd700;
       border-bottom: 2px solid #ffd700;
+    }
+    .login-required {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+      background: #1a1a1a;
+      padding: 40px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 50px auto;
+      border: 1px solid #333;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+    .login-required h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #ffd700;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+    }
+    .login-required p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #ccc;
+      line-height: 1.5;
+    }
+    .login-required a.btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      color: #000;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+    .login-required a.btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(45deg, #fff, #ffd700);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+      color: #000;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .news-ticker {
       background: #222;
@@ -126,16 +178,735 @@
       border-top: 2px solid #ffd700;
       color: #888;
     }
+    .portfolio-summary {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .summary-box {
+      flex: 1;
+      background: #000;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      text-align: center;
+    }
+    .summary-box h3 {
+      color: #ffd700;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+    .summary-box p {
+      color: #ddd;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .transaction-history {
+      margin-top: 40px;
+    }
+    .transaction-history h2 {
+      color: #ffd700;
+      margin-bottom: 20px;
+    }
+    #transaction-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    #transaction-table th,
+    #transaction-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #333;
+    }
+    #transaction-table th {
+      background: #000;
+      color: #ffd700;
+    }
+    #transaction-table tr:hover {
+      background: #111;
+    }
+    .positive-change {
+      color: #4CAF50;
+    }
+    .negative-change {
+      color: #f44336;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    #logout-button {
+      background: #ffd700;
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    #logout-button:hover {
+      background: #fff;
+    }
+    .welcome-section {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #111;
+      border-radius: 10px;
+      border: 1px solid #333;
+    }
+    .welcome-section h1 {
+      color: #ffd700;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    .btn {
+      background: #ffd700;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background: #fff;
+      transform: translateY(-2px);
+    }
+    .ai-content {
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    .ai-message {
+      color: #ffd700;
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #000;
+      border-radius: 8px;
+      border: 1px solid #333;
+    }
+    .analysis-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .analysis-section {
+      background: #000;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #333;
+    }
+    .analysis-section h3 {
+      color: #ffd700;
+      margin-bottom: 15px;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .analysis-content {
+      color: #ddd;
+      line-height: 1.6;
+    }
+    .last-update {
+      text-align: center;
+      margin-top: 20px;
+      color: #888;
+      font-size: 0.9em;
+    }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    .analysis-section {
+      animation: fadeIn 0.5s ease;
+    }
+    .ai-advice-container {
+      background: #000;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      margin: 20px 0;
+      min-height: 200px;
+    }
+    .ai-advice {
+      color: #ffd700;
+      font-size: 1.1em;
+      line-height: 1.6;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .ai-thinking {
+      display: none;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .thinking-dots {
+      display: inline-flex;
+      gap: 8px;
+    }
+    .thinking-dots span {
+      width: 8px;
+      height: 8px;
+      background: #ffd700;
+      border-radius: 50%;
+      animation: thinking 1.4s infinite;
+    }
+    .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes thinking {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.5); opacity: 1; }
+    }
+    .highlight {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+    .warning {
+      color: #f44336;
+      font-weight: bold;
+    }
+    .update-info {
+      color: #888;
+      font-size: 0.9em;
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+    .market-summary {
+      color: #ffd700;
+      font-size: 1.1em;
+      margin-bottom: 15px;
+    }
+    .coin-analysis {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border-left: 4px solid;
+      transition: all 0.3s ease;
+    }
+    .coin-analysis.up {
+      border-left-color: #4CAF50;
+    }
+    .coin-analysis.down {
+      border-left-color: #f44336;
+    }
+    .price-change {
+      margin-left: 10px;
+      font-weight: bold;
+    }
+    .price-change.up {
+      color: #4CAF50;
+    }
+    .price-change.down {
+      color: #f44336;
+    }
+    .momentum-section {
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+    .section-title {
+      color: #ffd700;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+    }
+    .momentum-item {
+      margin: 8px 0;
+      padding: 5px 0;
+    }
+    .market-status {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+    .status-content {
+      margin-top: 10px;
+    }
+    #ai-advice {
+      transition: opacity 0.3s ease;
+    }
+    .coin-analysis, .momentum-item, .market-status {
+      animation: fadeIn 0.5s ease;
+    }
+    .investment-opportunities, .momentum-recommendations, .investment-strategy {
+      margin: 20px 0;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+    }
+    .opportunity-card, .momentum-card {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border-left: 4px solid;
+      transition: all 0.3s ease;
+    }
+    .opportunity-card.up {
+      border-left-color: #4CAF50;
+    }
+    .opportunity-card.down {
+      border-left-color: #f44336;
+    }
+    .coin-header, .momentum-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .coin-details {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
+    .trend-info, .strength-info {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .trend-label, .strength-label {
+      color: #888;
+    }
+    .trend-value.up {
+      color: #4CAF50;
+    }
+    .trend-value.down {
+      color: #f44336;
+    }
+    .recommendation, .momentum-advice {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .strategy-points {
+      margin-top: 15px;
+    }
+    .strategy-point {
+      margin: 10px 0;
+      padding: 8px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+    .section-title {
+      color: #ffd700;
+      font-size: 1.2em;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .highlight {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+    .warning {
+      color: #f44336;
+      font-weight: bold;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .opportunity-card, .momentum-card, .strategy-point {
+      animation: fadeIn 0.5s ease;
+    }
+    .user-menu {
+      position: relative;
+      display: inline-block;
+      margin-left: 20px;
+    }
+
+    .user-avatar {
+      width: 30px;
+      height: 30px;
+      background-color: #ffd700;
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .user-dropdown {
+      display: none;
+      position: absolute;
+      top: 35px;
+      right: 0;
+      background-color: #111;
+      border: 1px solid #ffd700;
+      border-radius: 8px;
+      min-width: 120px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+
+    .user-dropdown a {
+      color: #ffd700 !important;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s ease;
+      border-bottom: none;
+    }
+
+    .user-dropdown a:hover {
+      background-color: #222;
+      border-bottom: none;
+    }
+
+    .user-menu:hover .user-dropdown {
+      display: block;
+    }
+
+    .ai-assistant-section {
+      background: #111;
+      padding: 30px;
+      border-radius: 12px;
+      margin: 20px 0;
+      border: 1px solid #333;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .ai-content {
+      background: #000;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #333;
+    }
+
+    .ai-thinking {
+      text-align: center;
+      padding: 20px;
+      color: #ffd700;
+    }
+
+    .thinking-dots {
+      display: inline-flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .thinking-dots span {
+      width: 8px;
+      height: 8px;
+      background: #ffd700;
+      border-radius: 50%;
+      animation: thinking 1.4s infinite;
+    }
+
+    .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes thinking {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.5); opacity: 1; }
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .analysis-section {
+      background: #000;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #333;
+    }
+
+    .analysis-section h4 {
+      color: #ffd700;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+    }
+
+    .coin-analysis {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border-left: 4px solid;
+      transition: all 0.3s ease;
+    }
+
+    .coin-analysis.up {
+      border-left-color: #4CAF50;
+    }
+
+    .coin-analysis.down {
+      border-left-color: #f44336;
+    }
+
+    .coin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .price-change {
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .price-change.up {
+      color: #4CAF50;
+      background: rgba(76, 175, 80, 0.1);
+    }
+
+    .price-change.down {
+      color: #f44336;
+      background: rgba(244, 67, 54, 0.1);
+    }
+
+    .trend-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trend-label {
+      color: #888;
+    }
+
+    .trend-value {
+      font-weight: bold;
+    }
+
+    .trend-value.up {
+      color: #4CAF50;
+    }
+
+    .trend-value.down {
+      color: #f44336;
+    }
+
+    .opportunity-card {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 8px;
+      border-left: 4px solid;
+      transition: all 0.3s ease;
+    }
+
+    .opportunity-card.up {
+      border-left-color: #4CAF50;
+    }
+
+    .opportunity-card.down {
+      border-left-color: #f44336;
+    }
+
+    .coin-details {
+      display: flex;
+      justify-content: space-between;
+      margin: 15px 0;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 6px;
+    }
+
+    .recommendation {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ddd;
+    }
+
+    .strategy-points {
+      margin-top: 15px;
+    }
+
+    .strategy-point {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border-left: 3px solid #ffd700;
+    }
+
+    .highlight {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+
+    .warning {
+      color: #f44336;
+      font-weight: bold;
+    }
+
+    .last-update {
+      text-align: center;
+      color: #888;
+      font-size: 0.9em;
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn {
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #fff, #ffd700);
+      transform: translateY(-2px);
+    }
+
+    /* Kartanesi için yeni stiller */
+    .ai-title-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .ai-title {
+      color: #ffd700;
+      font-size: 24px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .ai-snowflake {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      animation: spin 8s linear infinite;
+      filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    }
+
+    .ai-snowflake::before,
+    .ai-snowflake::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(45deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+        linear-gradient(-45deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+        linear-gradient(90deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+        linear-gradient(0deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%);
+      background-size: 100% 100%;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .ai-snowflake::after {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes glow {
+      0% { filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5)); }
+      100% { filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8)); }
+    }
+
+    .update-time {
+      text-align: right;
+      font-size: 12px;
+      color: #666;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .update-indicator {
+      width: 8px;
+      height: 8px;
+      background: #ffd700;
+      border-radius: 50%;
+      animation: pulse 1s infinite;
+    }
+
+    .update-btn {
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .update-btn:hover {
+      background: linear-gradient(45deg, #fff, #ffd700);
+      transform: scale(1.05);
+    }
+
+    .update-btn:active {
+      transform: scale(0.95);
+    }
+
+    .btn-icon {
+      font-size: 18px;
+      animation: spin 2s linear infinite;
+    }
+
+    .updating {
+      animation: updating 1s infinite;
+    }
+
+    @keyframes updating {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
     }
   </style>
 </head>
 <body class="page-profilim">
   <header>
     <div class="logo">
-      <img src="8ebfb1e03919fc6bae62be4740f0282e.jpg" alt="QuantumTrade Logo">
+      <img src="../8ebfb1e03919fc6bae62be4740f0282e.jpg" alt="QuantumTrade Logo">
       <span style="color: #ffd700;">QuantumTrade</span> <span class="mission">"The world is yours"</span>
     </div>
     <nav>
@@ -143,51 +914,539 @@
         <li><a href="index.html">Ana Sayfa</a></li>
         <li><a href="piyasa.html">Piyasa</a></li>
         <li><a href="profilim.html" class="active">Profilim</a></li>
-        <li><a href="satin-al.html">Satın Al</a></li>
-        <li><a href="login.html">Giriş Yap</a></li>
+        <li><a href="satinal.html">AI Asistan<div class="menu-snowflake"></div></a></li>
+        <li id="auth-section">
+          <a href="login.html" class="login-link">Giriş Yap</a>
+          <div class="user-menu" style="display: none;">
+            <div class="user-avatar"></div>
+            <div class="user-dropdown">
+              <a href="profilim.html">Profilim</a>
+              <a href="#" onclick="logout()">Çıkış Yap</a>
+            </div>
+          </div>
+        </li>
       </ul>
     </nav>
   </header>
 
-  <div class="news-ticker">
-    <div class="ticker-content">
-      📢 QuantumTrade'e Hoş Geldiniz! • 🚀 Anlık piyasa analizleri • 💼 Güvenli yatırımın adresi...
-    </div>
+  <div id="login-required" class="login-required" style="display: none;">
+    <h2>Henüz Giriş Yapmadınız</h2>
+    <p>Profilinizi görüntülemek için lütfen giriş yapın.</p>
+    <a href="login.html">Giriş Yap</a>
   </div>
 
-  <main>
-    <div class="profile-container">
-      <div class="profile-box">
-        <h3>Profil Bilgileri</h3>
-        <p><strong>İsim:</strong> Ali Yılmaz</p>
-        <p><strong>Kullanıcı Adı:</strong> alylmz</p>
-        <p><strong>E-posta:</strong> ali@example.com</p>
-      </div>
-
-      <div class="orders-box">
-        <h3>Satın Aldıklarım</h3>
-        <ul>
-          <li>💰 Premium Üyelik - 12 Ay</li>
-          <li>📊 Teknik Analiz Eğitimi</li>
-          <li>🔐 VIP Sinyal Paketi</li>
-        </ul>
+  <div id="profile-content">
+    <div class="news-ticker">
+      <div class="ticker-content">
+        📢 QuantumTrade'e Hoş Geldiniz! • 🚀 Anlık piyasa analizleri • 💼 Güvenli yatırımın adresi...
       </div>
     </div>
-  </main>
+
+    <main>
+      <div class="container">
+        <div class="welcome-section">
+          <h1 id="welcome-message">Hoş Geldiniz, <span id="welcome-name"></span></h1>
+          <div class="action-buttons">
+            <button class="btn" id="market-advice-btn">Günün Piyasa Yatırım Tavsiyesi</button>
+            <button class="btn" id="voice-ai-btn">Sesli AI Asistan</button>
+            <button class="btn" id="stop-voice-btn">Sesi Durdur</button>
+            <button class="btn" id="logout-button">Çıkış Yap</button>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Profil Bilgileri</h3>
+          <div class="profile-info">
+            <div class="info-item">
+              <span class="label">Ad Soyad:</span>
+              <span class="value" id="profile-fullname"></span>
+            </div>
+            <div class="info-item">
+              <span class="label">E-posta:</span>
+              <span class="value" id="profile-email"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section" id="ai-assistant-section" style="display: none;">
+          <div class="ai-header">
+            <h2>Yatırım Tavsiyeleri</h2>
+          </div>
+          <div class="ai-content">
+            <h3 id="ai-greeting">Merhaba, QuantumTrade olarak size özel yatırım tavsiyelerimi paylaşıyorum.</h3>
+            
+            <div id="ai-thinking" class="ai-thinking">
+              <div class="thinking-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <p>Yatırım tavsiyeleri hazırlanıyor...</p>
+            </div>
+
+            <div id="ai-advice" class="ai-advice" style="display: none;">
+              <!-- Tavsiyeler buraya dinamik olarak eklenecek -->
+            </div>
+
+            <div class="last-update" id="ai-last-update"></div>
+          </div>
+
+          <!-- Detaylı Analiz Alanları -->
+          <div class="ai-analysis-details">
+            <h3>Detaylı Piyasa Analizi</h3>
+            <div class="analysis-grid">
+              <div class="analysis-section">
+                <h4>Teknik Analiz</h4>
+                <div id="technical-analysis-profile"></div>
+              </div>
+              <div class="analysis-section">
+                <h4>Hacim Analizi</h4>
+                <div id="volume-analysis-profile"></div>
+              </div>
+              <div class="analysis-section">
+                <h4>Momentum Analizi</h4>
+                <div id="momentum-analysis-profile"></div>
+              </div>
+            </div>
+            <div class="investment-strategy">
+              <h4>Genel Yatırım Stratejisi</h4>
+              <div id="general-strategy-profile"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 
   <footer>
-    <p>© 2025 QuantumTrade • Tüm Hakları Saklıdır</p>
+    <p style="text-align: center; color: #ccc; font-family: 'Orbitron', sans-serif;">© 2025 <span style="color:#ffd700;">QuantumTrade</span> • Tüm Hakları Saklıdır</p>
   </footer>
 
   <script>
-    const links = document.querySelectorAll("nav a");
-    const currentPage = location.pathname.split("/").pop();
+    document.addEventListener('DOMContentLoaded', () => {
+      const userString = localStorage.getItem('user');
+      const profileContent = document.getElementById('profile-content');
+      const loginRequired = document.getElementById('login-required');
+      const loginLink = document.querySelector('.login-link');
+      const userMenu = document.querySelector('.user-menu');
+      const userAvatar = document.querySelector('.user-avatar');
 
-    links.forEach(link => {
-      if (link.getAttribute("href") === currentPage) {
-        link.classList.add("active");
+      // Sesli AI Asistan değişkenleri
+      let speechSynthesis = window.speechSynthesis;
+      let speaking = false;
+
+      // Çıkış yapma fonksiyonu
+      function logout() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = 'login.html';
+      }
+
+      // Sesli AI Asistan başlatma
+      document.getElementById('voice-ai-btn').addEventListener('click', () => {
+          if (!speaking) {
+              const aiAdvice = document.getElementById('ai-advice');
+              const user = JSON.parse(localStorage.getItem('user'));
+              if (aiAdvice) {
+                  // Önce karşılama mesajını oku
+                  const welcomeText = `İyi günler ${user.name} ${user.surname}. QuantumTrade ile milyoner olmaya son bir adım kaldı. O adımı hemen sizinle paylaşıyorum.`;
+                  const welcomeUtterance = new SpeechSynthesisUtterance(welcomeText);
+                  welcomeUtterance.lang = 'tr-TR';
+                  welcomeUtterance.rate = 1.0;
+                  welcomeUtterance.pitch = 1.0;
+                  welcomeUtterance.volume = 1.0;
+
+                  // Sonra yatırım tavsiyelerini oku
+                  const adviceText = aiAdvice.textContent;
+                  const adviceUtterance = new SpeechSynthesisUtterance(adviceText);
+                  adviceUtterance.lang = 'tr-TR';
+                  adviceUtterance.rate = 1.0;
+                  adviceUtterance.pitch = 1.0;
+                  adviceUtterance.volume = 1.0;
+
+                  // Karşılama mesajı bittiğinde tavsiyeleri okumaya başla
+                  welcomeUtterance.onend = () => {
+                      speechSynthesis.speak(adviceUtterance);
+                  };
+
+                  // Başlangıçta butonları güncelle
+                  document.getElementById('voice-ai-btn').style.opacity = '0.5';
+                  document.getElementById('stop-voice-btn').style.opacity = '1';
+                  speaking = true;
+
+                  // Karşılama mesajını okumaya başla
+                  speechSynthesis.speak(welcomeUtterance);
+
+                  // Ses bittiğinde butonları güncelle
+                  adviceUtterance.onend = () => {
+                      speaking = false;
+                      document.getElementById('voice-ai-btn').style.opacity = '1';
+                      document.getElementById('stop-voice-btn').style.opacity = '0.5';
+                  };
+              }
+          }
+      });
+
+      // Sesi durdurma
+      document.getElementById('stop-voice-btn').addEventListener('click', () => {
+          if (speaking) {
+              speechSynthesis.cancel();
+              speaking = false;
+              document.getElementById('voice-ai-btn').style.opacity = '1';
+              document.getElementById('stop-voice-btn').style.opacity = '0.5';
+          }
+      });
+
+      // Çıkış yapma butonu için event listener
+      const logoutButton = document.getElementById('logout-button');
+      if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+          logout();
+        });
+      }
+
+      // User dropdown menüsündeki çıkış yap linki için event listener
+      const logoutLink = document.querySelector('.user-dropdown a[onclick="logout()"]');
+      if (logoutLink) {
+        logoutLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          logout();
+        });
+      }
+
+      if (userString) {
+        // Kullanıcı giriş yapmışsa
+        const user = JSON.parse(userString);
+        profileContent.style.display = 'block';
+        loginRequired.style.display = 'none';
+
+        // Hoş geldiniz mesajı ve profil bilgileri
+        const welcomeName = document.getElementById('welcome-name');
+        const profileFullname = document.getElementById('profile-fullname');
+        const profileEmail = document.getElementById('profile-email');
+
+        if (welcomeName) welcomeName.textContent = `${user.name} ${user.surname}`;
+        if (profileFullname) profileFullname.textContent = `${user.name} ${user.surname}`;
+        if (profileEmail) profileEmail.textContent = user.email || '';
+
+        // Header'daki giriş/çıkış menüsü
+        if (loginLink) loginLink.style.display = 'none';
+        if (userMenu) {
+          userMenu.style.display = 'block';
+          if (userAvatar) {
+            const firstLetter = (user.name || user.username || '').charAt(0).toUpperCase();
+            userAvatar.textContent = firstLetter;
+          }
+        }
+
+        // AI asistan bölümünü göster
+        const aiSection = document.getElementById('ai-assistant-section');
+        if (aiSection) {
+          aiSection.style.display = 'block';
+          updateAIAnalysis();
+          setInterval(updateAIAnalysis, 30000);
+        }
+
+      } else {
+        // Kullanıcı giriş yapmamışsa
+        profileContent.style.display = 'none';
+        loginRequired.style.display = 'flex';
+
+        // Header'daki giriş/çıkış menüsü
+        if (loginLink) loginLink.style.display = 'block';
+        if (userMenu) userMenu.style.display = 'none';
       }
     });
+
+    // AI Analiz güncelleme fonksiyonu
+    async function updateAIAnalysis() {
+        try {
+            const thinking = document.getElementById('ai-thinking');
+            const advice = document.getElementById('ai-advice');
+            const greeting = document.getElementById('ai-greeting');
+            const lastUpdateDiv = document.getElementById('ai-last-update');
+            const technicalAnalysisDiv = document.getElementById('technical-analysis-profile');
+            const volumeAnalysisDiv = document.getElementById('volume-analysis-profile');
+            const momentumAnalysisDiv = document.getElementById('momentum-analysis-profile');
+            const generalStrategyDiv = document.getElementById('general-strategy-profile');
+            
+            if(thinking) thinking.style.display = 'block';
+            if(advice) advice.style.display = 'none';
+
+            // Binance API'den veri al
+            const symbols = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'ADAUSDT', 'DOGEUSDT'];
+            const analyses = [];
+            const investmentAdvice = [];
+
+            for (const symbol of symbols) {
+                try {
+                    // 24 saatlik istatistikler
+                    const statsResponse = await fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`);
+                    const stats = await statsResponse.json();
+
+                    // Son işlemler
+                    const tradesResponse = await fetch(`https://api.binance.com/api/v3/trades?symbol=${symbol}&limit=100`);
+                    const trades = await tradesResponse.json();
+
+                    // Fiyat değişimi analizi
+                    const priceChange = parseFloat(stats.priceChangePercent);
+                    const volume = parseFloat(stats.volume);
+                    const highPrice = parseFloat(stats.highPrice);
+                    const lowPrice = parseFloat(stats.lowPrice);
+                    const currentPrice = parseFloat(stats.lastPrice);
+
+                    // Momentum hesaplama
+                    const recentTrades = trades.slice(-20);
+                    const buyVolume = recentTrades.filter(t => t.isBuyerMaker).length;
+                    const sellVolume = recentTrades.filter(t => !t.isBuyerMaker).length;
+                    const momentum = (buyVolume - sellVolume) / (buyVolume + sellVolume) * 100;
+
+                    // Trend analizi
+                    const trend = {
+                        direction: priceChange > 0 ? 'YÜKSELIŞ' : 'DÜŞÜŞ',
+                        strength: Math.abs(priceChange)
+                    };
+
+                    // Hacim analizi
+                    const volumeAnalysis = {
+                        trend: volume > parseFloat(stats.quoteVolume) / 2 ? 'YÜKSELIŞ' : 'DÜŞÜŞ',
+                        value: volume
+                    };
+
+                    // Momentum analizi
+                    const momentumAnalysis = {
+                        direction: momentum > 0 ? 'YÜKSELIŞ' : 'DÜŞÜŞ',
+                        strength: Math.abs(momentum)
+                    };
+
+                    analyses.push({
+                        symbol,
+                        trend,
+                        volume: volumeAnalysis,
+                        momentum: momentumAnalysis,
+                        currentPrice
+                    });
+
+                    // Yatırım tavsiyesi oluştur
+                    let confidence = 0;
+                    let advice = '';
+                    let reasoning = [];
+
+                    // Trend analizi
+                    if (trend.direction === 'YÜKSELIŞ' && trend.strength > 3) {
+                        confidence += 30;
+                        reasoning.push('Güçlü yükseliş trendi');
+                    } else if (trend.direction === 'DÜŞÜŞ' && trend.strength > 3) {
+                        confidence -= 30;
+                        reasoning.push('Güçlü düşüş trendi');
+                    }
+
+                    // Hacim analizi
+                    if (volume > parseFloat(stats.quoteVolume) / 2) {
+                        confidence += 20;
+                        reasoning.push('Yüksek işlem hacmi');
+                    }
+
+                    // Momentum analizi
+                    if (Math.abs(momentum) > 20) {
+                        confidence += 10;
+                        reasoning.push('Güçlü momentum');
+                    }
+
+                    // Volatilite analizi
+                    const volatility = ((highPrice - lowPrice) / lowPrice) * 100;
+                    if (volatility > 5) {
+                        confidence += 10;
+                        reasoning.push('Yüksek volatilite fırsatı');
+                    }
+
+                    // Sonuç değerlendirmesi
+                    if (confidence >= 50) {
+                        advice = 'GÜÇLÜ ALIM';
+                    } else if (confidence >= 30) {
+                        advice = 'ALIM';
+                    } else if (confidence <= -50) {
+                        advice = 'GÜÇLÜ SATIM';
+                    } else if (confidence <= -30) {
+                        advice = 'SATIM';
+                    } else {
+                        advice = 'BEKLE';
+                    }
+
+                    investmentAdvice.push({
+                        symbol,
+                        currentPrice,
+                        advice,
+                        confidence: Math.abs(confidence),
+                        reasoning,
+                        riskLevel: volatility > 10 ? 'YÜKSEK' : volatility > 5 ? 'ORTA' : 'DÜŞÜK'
+                    });
+
+                } catch (error) {
+                    console.error(`${symbol} için veri alınamadı:`, error);
+                }
+            }
+
+            // Genel yatırım stratejisi oluştur
+            const generalAdvice = [
+                'Piyasa genelinde yükseliş trendi devam ediyor.',
+                'Yüksek hacimli coinlere odaklanın.',
+                'Risk yönetimi için portföyünüzü çeşitlendirin.',
+                'Kısa vadeli işlemler için volatilite fırsatlarını değerlendirin.',
+                'Uzun vadeli yatırımlar için güçlü temellere sahip coinleri tercih edin.'
+            ].join('\n');
+
+            // AI Karşılama mesajı
+            const user = JSON.parse(localStorage.getItem('user'));
+            if(greeting && user) {
+                greeting.textContent = `Merhaba ${user.name} ${user.surname}, QuantumTrade olarak size özel yatırım tavsiyelerimi paylaşıyorum.`;
+            } else if(greeting) {
+                greeting.textContent = 'Merhaba, QuantumTrade olarak size özel yatırım tavsiyelerimi paylaşıyorum.';
+            }
+
+            // Detaylı Analiz Alanlarını Doldur
+            if (analyses.length > 0) {
+                analyses.forEach(analysis => {
+                    // Teknik Analiz
+                    if (technicalAnalysisDiv && analysis.trend) {
+                        technicalAnalysisDiv.innerHTML += `
+                            <div class="coin-analysis ${analysis.trend.direction === 'YÜKSELIŞ' ? 'up' : 'down'}">
+                                <div class="coin-header">
+                                    <strong>${analysis.symbol.replace('USDT', '')}</strong>
+                                    <span class="price-change ${analysis.trend.direction === 'YÜKSELIŞ' ? 'up' : 'down'}">
+                                        ${analysis.trend.direction} (%${analysis.trend.strength.toFixed(2)})
+                                    </span>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    // Hacim Analizi
+                    if (volumeAnalysisDiv && analysis.volume) {
+                        volumeAnalysisDiv.innerHTML += `
+                            <div class="coin-analysis">
+                                <div class="coin-header">
+                                    <strong>${analysis.symbol.replace('USDT', '')}</strong>
+                                    <span class="trend-info">
+                                        <span class="trend-label">Hacim:</span>
+                                        <span class="trend-value ${analysis.volume.trend === 'YÜKSELIŞ' ? 'up' : 'down'}">
+                                            ${analysis.volume.trend}
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    // Momentum Analizi
+                    if (momentumAnalysisDiv && analysis.momentum) {
+                        momentumAnalysisDiv.innerHTML += `
+                            <div class="coin-analysis ${analysis.momentum.direction === 'YÜKSELIŞ' ? 'up' : 'down'}">
+                                <div class="coin-header">
+                                    <strong>${analysis.symbol.replace('USDT', '')}</strong>
+                                    <span class="trend-info">
+                                        <span class="trend-label">Momentum:</span>
+                                        <span class="trend-value ${analysis.momentum.direction === 'YÜKSELIŞ' ? 'up' : 'down'}">
+                                            ${analysis.momentum.direction} (%${analysis.momentum.strength.toFixed(2)})
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                // Genel Yatırım Stratejisi
+                if (generalStrategyDiv) {
+                    generalStrategyDiv.innerHTML = `
+                        <div class="strategy-points">
+                            ${generalAdvice.split('\n').map(point => `
+                                <div class="strategy-point">
+                                    <p>${point}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+
+                // Yatırım Fırsatları
+                if (investmentAdvice.length > 0 && advice) {
+                    let investmentAdviceHtml = `
+                        <div class="ai-title-container">
+                            <div class="ai-snowflake"></div>
+                            <h2 class="ai-title">QUANTUMTRADE AI</h2>
+                            <div class="ai-snowflake"></div>
+                        </div>
+                        <h4>Öne Çıkan Yatırım Fırsatları</h4>`;
+                    investmentAdvice
+                        .sort((a, b) => b.confidence - a.confidence)
+                        .slice(0, 5)
+                        .forEach(adviceDetail => {
+                            const adviceClass = adviceDetail.advice.includes('ALIM') ? 'up' : 
+                                              adviceDetail.advice.includes('SATIM') ? 'down' : '';
+                            investmentAdviceHtml += `
+                                <div class="opportunity-card ${adviceClass}">
+                                    <div class="coin-header">
+                                        <strong>${adviceDetail.symbol.replace('USDT', '')}</strong>
+                                        <span class="price-change ${adviceClass}">${adviceDetail.advice}</span>
+                                    </div>
+                                    <div class="coin-details">
+                                        <div class="trend-info">
+                                            <span class="trend-label">Güven:</span>
+                                            <span class="trend-value">%${adviceDetail.confidence.toFixed(0)}</span>
+                                        </div>
+                                        <div class="trend-info">
+                                            <span class="trend-label">Risk:</span>
+                                            <span class="trend-value ${adviceDetail.riskLevel === 'YÜKSEK' ? 'warning' : 'highlight'}">${adviceDetail.riskLevel}</span>
+                                        </div>
+                                    </div>
+                                    <div class="recommendation">
+                                        <p>${adviceDetail.reasoning.join(' • ')}</p>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    advice.innerHTML = investmentAdviceHtml;
+                } else if (advice) {
+                    advice.innerHTML = '<div style="text-align: center; color: #888;">Şu anda görüntülenecek yatırım tavsiyesi bulunmuyor.</div>';
+                }
+            } else if (advice) {
+                advice.innerHTML = '<div style="color: red; text-align: center;">Analiz verisi alınamadı veya boş.</div>';
+            }
+
+            // Son güncelleme zamanı
+            if(lastUpdateDiv) {
+                const now = new Date();
+                lastUpdateDiv.textContent = `Son Güncelleme: ${now.toLocaleTimeString('tr-TR')}`;
+            }
+
+            if(thinking) thinking.style.display = 'none';
+            if(advice) advice.style.display = 'block';
+
+        } catch (error) {
+            console.error('Yatırım tavsiyesi güncellenirken hata:', error);
+            const thinking = document.getElementById('ai-thinking');
+            const advice = document.getElementById('ai-advice');
+            
+            if(thinking) thinking.style.display = 'none';
+            if(advice) {
+                advice.innerHTML = `
+                    <div style="color: red; text-align: center; padding: 20px;">
+                        <h4>Yatırım tavsiyesi alınamadı</h4>
+                        <p>Lütfen aşağıdaki kontrolleri yapın:</p>
+                        <ul style="text-align: left; margin: 10px 0;">
+                            <li>İnternet bağlantınızı kontrol edin</li>
+                            <li>Binance API'sine erişiminizi kontrol edin</li>
+                            <li>Daha sonra tekrar deneyin</li>
+                        </ul>
+                        <button class="btn" onclick="updateAIAnalysis()">Tekrar Dene</button>
+                    </div>
+                `;
+                advice.style.display = 'block';
+            }
+            
+            const lastUpdateDiv = document.getElementById('ai-last-update');
+            if(lastUpdateDiv) lastUpdateDiv.textContent = 'Güncelleme hatası';
+        }
+    }
   </script>
 </body>
 </html>

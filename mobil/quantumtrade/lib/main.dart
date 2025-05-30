@@ -1,104 +1,106 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'pages/home_page.dart';          // Ana Sayfa
-import 'pages/piyasa_page.dart';         // Piyasa Sayfası
-import 'pages/profilim_page.dart';       // Profilim Sayfası
-import 'pages/satin_al_page.dart';       // Satın Al Sayfası
-import 'pages/login_page.dart';          // Giriş Sayfası
-import 'pages/register_page.dart';       // Kayıt Sayfası
-import 'pages/forgot_password_page.dart'; // Şifre Kurtarma Sayfası
-import 'pages/ayarlar_page.dart';        // Ayarlar Sayfası
-import 'pages/yardim_page.dart';         // Yardım Sayfası
-import 'pages/page_transition.dart';
 import 'providers/theme_provider.dart';
 import 'providers/language_provider.dart';
 import 'providers/notification_provider.dart';
-import 'pages/notifications_page.dart';
+import 'providers/auth_provider.dart';
+import 'pages/home_page.dart';
+import 'pages/piyasa_page.dart';
+import 'pages/profilim_page.dart';
+import 'pages/ai_assistant_page.dart';
+import 'pages/ayarlar_page.dart';
+import 'pages/yardim_page.dart';
+import 'pages/giris_page.dart';
+import 'pages/registration_step1_page.dart';
+import 'pages/registration_step2_page.dart';
+import 'pages/register_page.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
         ChangeNotifierProvider(create: (_) => NotificationProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
-      child: const MyApp(),
-    ),
-  );
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    final languageProvider = Provider.of<LanguageProvider>(context);
-
-    return MaterialApp(
-      title: 'QuantumTrade',
-      theme: themeProvider.theme,
-      initialRoute: '/',
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          case '/':
-            return PageTransition(
-              page: const HomePage(),
-              direction: AxisDirection.right,
-            );
-          case '/piyasa':
-            return PageTransition(
-              page: const PiyasaPage(),
-              direction: AxisDirection.right,
-            );
-          case '/profilim':
-            return PageTransition(
-              page: const ProfilimPage(),
-              direction: AxisDirection.right,
-            );
-          case '/satin-al':
-            return PageTransition(
-              page: const SatinAlPage(),
-              direction: AxisDirection.right,
-            );
-          case '/login':
-            return PageTransition(
-              page: const LoginPage(),
-              direction: AxisDirection.up,
-            );
-          case '/register':
-            return PageTransition(
-              page: const RegisterPage(),
-              direction: AxisDirection.up,
-            );
-          case '/forgot-password':
-            return PageTransition(
-              page: const ForgotPasswordPage(),
-              direction: AxisDirection.up,
-            );
-          case '/ayarlar':
-            return PageTransition(
-              page: const AyarlarPage(),
-              direction: AxisDirection.right,
-            );
-          case '/yardim':
-            return PageTransition(
-              page: const YardimPage(),
-              direction: AxisDirection.right,
-            );
-          case '/notifications':
-            return PageTransition(
-              page: const NotificationsPage(),
-              direction: AxisDirection.right,
-            );
-          default:
-            return PageTransition(
-              page: const HomePage(),
-              direction: AxisDirection.right,
-            );
-        }
-      },
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            title: 'QuantumTrade',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+              brightness: Brightness.light,
+              scaffoldBackgroundColor: Colors.white,
+              appBarTheme: const AppBarTheme(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+              ),
+            ),
+            darkTheme: ThemeData(
+              primarySwatch: Colors.blue,
+              brightness: Brightness.dark,
+              scaffoldBackgroundColor: Colors.black,
+              appBarTheme: const AppBarTheme(
+                backgroundColor: Color(0xFF111111),
+                foregroundColor: Color(0xFFFFD700),
+              ),
+            ),
+            themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+            initialRoute: '/',
+            routes: {
+              '/': (context) => Consumer<AuthProvider>(
+                    builder: (context, authProvider, child) {
+                      return authProvider.isAuthenticated ? const HomePage() : const GirisPage();
+                    },
+                  ),
+              '/piyasa': (context) => Consumer<AuthProvider>(
+                    builder: (context, authProvider, child) {
+                      return authProvider.isAuthenticated ? const PiyasaPage() : const GirisPage();
+                    },
+                  ),
+              '/profilim': (context) => Consumer<AuthProvider>(
+                    builder: (context, authProvider, child) {
+                      return authProvider.isAuthenticated ? const ProfilimPage() : const GirisPage();
+                    },
+                  ),
+              '/ai-analiz': (context) => Consumer<AuthProvider>(
+                    builder: (context, authProvider, child) {
+                      return authProvider.isAuthenticated ? const AIAssistantPage() : const GirisPage();
+                    },
+                  ),
+              '/ai-asistan': (context) => Consumer<AuthProvider>(
+                    builder: (context, authProvider, child) {
+                      return authProvider.isAuthenticated ? const AIAssistantPage() : const GirisPage();
+                    },
+                  ),
+              '/ayarlar': (context) => Consumer<AuthProvider>(
+                    builder: (context, authProvider, child) {
+                      return authProvider.isAuthenticated ? const AyarlarPage() : const GirisPage();
+                    },
+                  ),
+              '/yardim': (context) => Consumer<AuthProvider>(
+                    builder: (context, authProvider, child) {
+                      return authProvider.isAuthenticated ? const YardimPage() : const GirisPage();
+                    },
+                  ),
+              '/giris': (context) => const GirisPage(),
+              '/login': (context) => const GirisPage(),
+              '/register': (context) => const RegisterPage(),
+              '/registerStep1': (context) => const RegistrationStep1Page(),
+              '/registerStep2': (context) => RegistrationStep2Page(userData: ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>),
+            },
+          );
+        },
+      ),
     );
   }
 }

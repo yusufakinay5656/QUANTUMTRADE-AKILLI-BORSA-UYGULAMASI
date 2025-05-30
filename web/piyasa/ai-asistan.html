@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumTrade AI Asistan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="ai-asistan.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <img src="8ebfb1e03919fc6bae62be4740f0282e.jpg" alt="QuantumTrade Logo">
+                <span>QuantumTrade</span>
+            </div>
+            <nav>
+                <a href="index.html">Ana Sayfa</a>
+                <a href="piyasa.html">Piyasa</a>
+                <a href="profilim.html">Profilim</a>
+                <a href="ai-asistan.html" class="active">AI Asistan</a>
+            </nav>
+        </header>
+
+        <main class="chat-container">
+            <div class="chat-header">
+                <h1>AI Asistan</h1>
+                <p class="subtitle">Kripto para ve borsa uzmanı yapay zeka asistanınız</p>
+            </div>
+
+            <div class="analysis-controls">
+                <div class="search-container">
+                    <input type="text" id="coin-search" placeholder="Kripto para ara (örn: BTC, ETH)">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="category-filters">
+                    <button class="category-btn active" data-category="all">Tümü</button>
+                    <button class="category-btn" data-category="trending">Trend</button>
+                    <button class="category-btn" data-category="volume">Hacim</button>
+                    <button class="category-btn" data-category="volatility">Volatilite</button>
+                </div>
+            </div>
+
+            <div class="live-indicators">
+                <div class="indicator">
+                    <span class="pulse-dot"></span>
+                    <span>Canlı Analiz</span>
+                </div>
+                <div class="indicator">
+                    <span class="status-dot"></span>
+                    <span>Veri Akışı</span>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <!-- Mesajlar buraya dinamik olarak eklenecek -->
+            </div>
+
+            <div class="chat-input-container">
+                <form id="chat-form">
+                    <div class="input-wrapper">
+                        <input type="text" id="user-input" placeholder="Mesajınızı yazın veya analiz isteyin..." autocomplete="off">
+                        <button type="submit">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <div class="status-bar">
+            <div class="connection-status">
+                <span class="status-dot"></span>
+                <span class="status-text">Bağlantı bekleniyor...</span>
+            </div>
+            <div class="api-status">
+                <span class="api-dot"></span>
+                <span class="api-text">API Durumu</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="ai-asistan.js"></script>
+</body>
+</html> 

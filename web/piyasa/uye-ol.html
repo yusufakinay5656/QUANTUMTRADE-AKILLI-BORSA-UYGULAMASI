@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Üye Ol | QuantumTrade</title>
+  <title>Üye Ol - QuantumTrade</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -39,38 +40,191 @@
       padding: 60px 20px;
       animation: fadeIn 1.5s ease-in-out;
     }
-    .register-section {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .form-container {
+      background: rgba(17, 17, 17, 0.95);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      backdrop-filter: blur(10px);
       max-width: 500px;
       margin: 0 auto;
-      background: #111;
-      padding: 40px;
+    }
+
+    .step {
+      display: none;
+    }
+
+    .step.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .face-recognition-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .face-recognition-container.active {
+      display: flex;
+    }
+
+    .camera-view {
+      position: relative;
+      width: 800px;
+      height: 600px;
+      margin: 0 auto;
       border-radius: 12px;
-      border: 1px solid #444;
+      overflow: hidden;
+      border: 2px solid rgba(0, 255, 0, 0.3);
+    }
+
+    #video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .scan-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px) 0 0 / 40px 40px,
+        linear-gradient(0deg, rgba(0,255,0,0.1) 1px, transparent 1px) 0 0 / 40px 40px;
+      z-index: 5;
+    }
+
+    .scan-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #00ff00;
+      box-shadow: 0 0 10px #00ff00;
+      animation: scan 2s linear infinite;
+      z-index: 10;
+    }
+
+    .scan-circle {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border: 2px solid #00ff00;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 20px #00ff00;
+      z-index: 9;
+    }
+
+    .scan-circle::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      background: #00ff00;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      animation: rotate 2s linear infinite;
+    }
+
+    .capture-timer {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #00ff00;
+      font-size: 36px;
+      font-family: 'Orbitron', sans-serif;
+      z-index: 10;
+    }
+
+    .capture-progress {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 4px;
+      background: rgba(0, 255, 0, 0.2);
+      border-radius: 2px;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .capture-progress-bar {
+      width: 0%;
+      height: 100%;
+      background: #00ff00;
+      transition: width 0.1s linear;
+    }
+
+    .status {
+      color: #00ff00;
+      font-size: 18px;
+      margin-top: 20px;
       text-align: center;
+      font-family: 'Orbitron', sans-serif;
     }
-    .register-section input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #333;
-      border-radius: 8px;
-      background: #000;
-      color: #ffd700;
-    }
-    .register-section button {
-      width: 100%;
-      padding: 12px;
+
+    .close-camera {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
       border: none;
-      border-radius: 8px;
-      background: #ffd700;
-      color: #000;
-      font-weight: bold;
-      font-size: 1rem;
+      color: #00ff00;
+      font-size: 24px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      z-index: 20;
     }
-    .register-section button:hover {
-      background: #fff;
+
+    @keyframes scan {
+      0% { top: 0; }
+      100% { top: 100%; }
+    }
+
+    @keyframes rotate {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    .message {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      display: none;
+    }
+    .success {
+      background: #004d00;
+      color: #fff;
+      border: 1px solid #006600;
+    }
+    .error {
+      background: #660000;
+      color: #fff;
+      border: 1px solid #990000;
     }
     footer {
       text-align: center;
@@ -95,21 +249,209 @@
   </header>
 
   <main>
-    <h2 style="text-align:center">Hızlı Üye Ol</h2>
-    <div class="register-section">
-      <form>
-        <input type="text" placeholder="İsim" required />
-        <input type="text" placeholder="Soyisim" required />
-        <input type="text" placeholder="Kullanıcı Adı" required />
-        <input type="email" placeholder="E-posta" required />
-        <input type="password" placeholder="Şifre" required />
-        <button type="submit">Kaydol</button>
-      </form>
+    <div class="container">
+      <div class="form-container">
+        <h2>Üye Ol</h2>
+        
+        <div id="step1" class="step active">
+          <form id="registerForm">
+            <div class="form-group">
+              <input type="text" id="name" name="name" placeholder="Adınız" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="surname" name="surname" placeholder="Soyadınız" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="username" name="username" placeholder="Kullanıcı Adı" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" name="email" placeholder="E-posta" required>
+            </div>
+            <div class="form-group">
+              <input type="password" id="password" name="password" placeholder="Şifre" required>
+            </div>
+            <button type="button" id="nextStep" class="btn">Devam Et</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="face-recognition-container" id="face-recognition">
+      <button class="close-camera" id="close-camera">×</button>
+      <div class="camera-view">
+        <video id="video" width="800" height="600" autoplay muted></video>
+        <canvas id="overlay" width="800" height="600"></canvas>
+        <div class="scan-grid"></div>
+        <div class="scan-line"></div>
+        <div class="scan-circle"></div>
+        <div class="capture-timer">5</div>
+        <div class="capture-progress">
+          <div class="capture-progress-bar"></div>
+        </div>
+      </div>
+      <div id="status" class="status">Kamera başlatılıyor...</div>
     </div>
   </main>
 
   <footer>
     <p>© 2025 QuantumTrade • Tüm Hakları Saklıdır</p>
   </footer>
+
+  <script>
+    let video;
+    let faceDescriptor = null;
+    let isCapturing = false;
+
+    async function initFaceRecognition() {
+      const status = document.getElementById('status');
+      status.textContent = 'Modeller yükleniyor...';
+      
+      try {
+        await Promise.all([
+          faceapi.nets.tinyFaceDetector.loadFromUri('https://justadudewhohacks.github.io/face-api.js/models'),
+          faceapi.nets.faceLandmark68Net.loadFromUri('https://justadudewhohacks.github.io/face-api.js/models'),
+          faceapi.nets.faceRecognitionNet.loadFromUri('https://justadudewhohacks.github.io/face-api.js/models')
+        ]);
+        
+        video = document.getElementById('video');
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+          video: { 
+            width: 800,
+            height: 600,
+            facingMode: 'user'
+          } 
+        });
+        video.srcObject = stream;
+        
+        video.onloadedmetadata = () => {
+          video.play();
+          status.textContent = 'Kamera başlatıldı, yüzünüzü görüntüleyin';
+          startFaceDetection();
+        };
+      } catch (error) {
+        console.error('Kamera başlatma hatası:', error);
+        status.textContent = 'Kamera başlatılamadı: ' + error.message;
+      }
+    }
+
+    async function startFaceDetection() {
+      const status = document.getElementById('status');
+      const timer = document.querySelector('.capture-timer');
+      const progressBar = document.querySelector('.capture-progress-bar');
+      let captureTime = 5;
+      
+      try {
+        const detections = await faceapi.detectAllFaces(
+          video,
+          new faceapi.TinyFaceDetectorOptions()
+        ).withFaceLandmarks().withFaceDescriptors();
+
+        if (detections.length > 0) {
+          if (!isCapturing) {
+            isCapturing = true;
+            status.textContent = 'Yüz algılandı, tarama başlıyor...';
+            
+            const interval = setInterval(() => {
+              captureTime--;
+              timer.textContent = captureTime;
+              progressBar.style.width = `${(5 - captureTime) * 20}%`;
+              
+              if (captureTime <= 0) {
+                clearInterval(interval);
+                faceDescriptor = Array.from(detections[0].descriptor);
+                status.textContent = 'Yüz taraması tamamlandı!';
+                
+                // Kayıt işlemini gerçekleştir
+                const form = document.getElementById('registerForm');
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+                data.faceDescriptor = faceDescriptor;
+
+                fetch('http://localhost:3000/api/auth/register', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                  if (result.success) {
+                    status.textContent = 'Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...';
+                    setTimeout(() => {
+                      window.location.href = 'login.html';
+                    }, 2000);
+                  } else {
+                    status.textContent = result.message;
+                    isCapturing = false;
+                    captureTime = 5;
+                    timer.textContent = captureTime;
+                    progressBar.style.width = '0%';
+                  }
+                })
+                .catch(error => {
+                  console.error('Kayıt hatası:', error);
+                  status.textContent = 'Kayıt sırasında bir hata oluştu';
+                  isCapturing = false;
+                  captureTime = 5;
+                  timer.textContent = captureTime;
+                  progressBar.style.width = '0%';
+                });
+              }
+            }, 1000);
+          }
+        } else {
+          status.textContent = 'Yüz algılanamadı, lütfen kameraya bakın';
+          setTimeout(startFaceDetection, 1000);
+        }
+      } catch (error) {
+        console.error('Yüz algılama hatası:', error);
+        status.textContent = 'Yüz algılama sırasında bir hata oluştu';
+      }
+    }
+
+    document.getElementById('nextStep').addEventListener('click', async function() {
+      const form = document.getElementById('registerForm');
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch('http://localhost:3000/api/auth/validate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: data.email,
+            username: data.username
+          })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          document.getElementById('face-recognition').classList.add('active');
+          initFaceRecognition();
+        } else {
+          alert(result.message);
+        }
+      } catch (error) {
+        console.error('Doğrulama hatası:', error);
+        alert('Doğrulama sırasında bir hata oluştu');
+      }
+    });
+
+    document.getElementById('close-camera').addEventListener('click', function() {
+      document.getElementById('face-recognition').classList.remove('active');
+      stopVideo();
+    });
+
+    function stopVideo() {
+      if (video && video.srcObject) {
+        video.srcObject.getTracks().forEach(track => track.stop());
+      }
+      faceDescriptor = null;
+      isCapturing = false;
+    }
+  </script>
 </body>
 </html>

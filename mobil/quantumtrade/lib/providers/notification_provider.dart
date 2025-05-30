@@ -2,25 +2,25 @@ import 'package:flutter/material.dart';
 
 class NotificationProvider with ChangeNotifier {
   List<String> _notifications = [];
-  int _unreadCount = 0;
+  bool _hasUnreadNotifications = false;
 
   List<String> get notifications => _notifications;
-  int get unreadCount => _unreadCount;
+  bool get hasUnreadNotifications => _hasUnreadNotifications;
 
   void addNotification(String notification) {
     _notifications.insert(0, notification);
-    _unreadCount++;
+    _hasUnreadNotifications = true;
     notifyListeners();
   }
 
   void markAllAsRead() {
-    _unreadCount = 0;
+    _hasUnreadNotifications = false;
     notifyListeners();
   }
 
   void clearNotifications() {
     _notifications.clear();
-    _unreadCount = 0;
+    _hasUnreadNotifications = false;
     notifyListeners();
   }
 } 

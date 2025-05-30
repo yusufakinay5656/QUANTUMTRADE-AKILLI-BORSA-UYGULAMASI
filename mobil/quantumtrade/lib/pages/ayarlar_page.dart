@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 import '../providers/language_provider.dart';
+import '../providers/auth_provider.dart';
+import '../widgets/user_avatar_button.dart';
 
 class AyarlarPage extends StatelessWidget {
   const AyarlarPage({super.key});
@@ -31,6 +33,9 @@ class AyarlarPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          UserAvatarButton(),
+        ],
       ),
       drawer: Drawer(
         backgroundColor: themeProvider.isDarkMode ? const Color(0xFF111111) : Colors.white,
@@ -75,7 +80,7 @@ class AyarlarPage extends StatelessWidget {
               selectedTileColor: themeProvider.isDarkMode ? const Color(0xFF222222) : Colors.grey[200],
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/');
+                Navigator.pushReplacementNamed(context, '/');
               },
             ),
             ListTile(
@@ -85,7 +90,7 @@ class AyarlarPage extends StatelessWidget {
               selectedTileColor: themeProvider.isDarkMode ? const Color(0xFF222222) : Colors.grey[200],
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/piyasa');
+                Navigator.pushReplacementNamed(context, '/piyasa');
               },
             ),
             ListTile(
@@ -95,30 +100,30 @@ class AyarlarPage extends StatelessWidget {
               selectedTileColor: themeProvider.isDarkMode ? const Color(0xFF222222) : Colors.grey[200],
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/profilim');
+                Navigator.pushReplacementNamed(context, '/profilim');
               },
             ),
             ListTile(
-              leading: Icon(Icons.shopping_cart, color: themeProvider.isDarkMode ? const Color(0xFFFFD700) : Colors.black),
-              title: Text(languageProvider.getText('Satın Al'), style: TextStyle(color: themeProvider.isDarkMode ? Colors.white : Colors.black)),
+              leading: Icon(Icons.smart_toy, color: themeProvider.isDarkMode ? const Color(0xFFFFD700) : Colors.black),
+              title: Text('AI Analiz', style: TextStyle(color: themeProvider.isDarkMode ? Colors.white : Colors.black)),
               selected: false,
               selectedTileColor: themeProvider.isDarkMode ? const Color(0xFF222222) : Colors.grey[200],
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/satin-al');
+                Navigator.pushReplacementNamed(context, '/ai-analiz');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.psychology, color: themeProvider.isDarkMode ? const Color(0xFFFFD700) : Colors.black),
+              title: Text('AI Asistan', style: TextStyle(color: themeProvider.isDarkMode ? Colors.white : Colors.black)),
+              selected: false,
+              selectedTileColor: themeProvider.isDarkMode ? const Color(0xFF222222) : Colors.grey[200],
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/ai-asistan');
               },
             ),
             Divider(color: themeProvider.isDarkMode ? const Color(0xFF444444) : Colors.grey),
-            ListTile(
-              leading: Icon(Icons.login, color: themeProvider.isDarkMode ? const Color(0xFFFFD700) : Colors.black),
-              title: Text(languageProvider.getText('Kullanıcı Girişi'), style: TextStyle(color: themeProvider.isDarkMode ? Colors.white : Colors.black)),
-              selected: false,
-              selectedTileColor: themeProvider.isDarkMode ? const Color(0xFF222222) : Colors.grey[200],
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/login');
-              },
-            ),
             ListTile(
               leading: Icon(Icons.settings, color: themeProvider.isDarkMode ? const Color(0xFFFFD700) : Colors.black),
               title: Text(languageProvider.getText('Ayarlar'), style: TextStyle(color: themeProvider.isDarkMode ? Colors.white : Colors.black)),
@@ -135,7 +140,60 @@ class AyarlarPage extends StatelessWidget {
               selectedTileColor: themeProvider.isDarkMode ? const Color(0xFF222222) : Colors.grey[200],
               onTap: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, '/yardim');
+                Navigator.pushReplacementNamed(context, '/yardim');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout, color: themeProvider.isDarkMode ? const Color(0xFFFFD700) : Colors.black),
+              title: Text(languageProvider.getText('Çıkış Yap'), style: TextStyle(color: themeProvider.isDarkMode ? Colors.white : Colors.black)),
+              selected: false,
+              selectedTileColor: themeProvider.isDarkMode ? const Color(0xFF222222) : Colors.grey[200],
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor: themeProvider.isDarkMode ? const Color(0xFF111111) : Colors.white,
+                      title: Text(
+                        'Çıkış Yap',
+                        style: TextStyle(
+                          color: themeProvider.isDarkMode ? const Color(0xFFFFD700) : Colors.black,
+                        ),
+                      ),
+                      content: Text(
+                        'Çıkış yapmak istediğinizden emin misiniz?',
+                        style: TextStyle(
+                          color: themeProvider.isDarkMode ? Colors.white : Colors.black,
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'İptal',
+                            style: TextStyle(
+                              color: themeProvider.isDarkMode ? const Color(0xFFFFD700) : Colors.blue,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Provider.of<AuthProvider>(context, listen: false).logout();
+                            Navigator.pushReplacementNamed(context, '/login');
+                          },
+                          child: Text(
+                            'Çıkış Yap',
+                            style: TextStyle(
+                              color: themeProvider.isDarkMode ? const Color(0xFFFFD700) : Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             ),
           ],

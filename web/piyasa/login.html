@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Giriş Yap | QuantumTrade</title>
+  <title>Giriş Yap - QuantumTrade</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -61,35 +62,90 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 80vh;
+      min-height: 80vh;
       animation: fadeIn 1.5s ease-in-out;
     }
-    .login-box {
-      background-color: #111;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .form-container {
+      background: rgba(17, 17, 17, 0.95);
+      border-radius: 15px;
       padding: 40px;
-      border-radius: 12px;
-      border: 1px solid #444;
-      width: 100%;
-      max-width: 400px;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      backdrop-filter: blur(10px);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .form-container h2 {
       text-align: center;
-    }
-    .login-box h2 {
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       font-size: 2rem;
+      color: #ffd700;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
     }
-    .login-box input {
-      width: 100%;
+
+    .login-tabs {
+      display: flex;
+      margin-bottom: 30px;
+      gap: 15px;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      padding-bottom: 15px;
+    }
+
+    .tab-btn {
+      flex: 1;
       padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #333;
+      border: none;
+      background: transparent;
+      color: #888;
+      cursor: pointer;
       border-radius: 8px;
-      background: #000;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn:hover {
+      color: #ffd700;
+      background: rgba(255, 215, 0, 0.1);
+    }
+
+    .tab-btn.active {
+      background: #ffd700;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.5);
       color: #ffd700;
       font-family: 'Orbitron', sans-serif;
+      transition: all 0.3s ease;
     }
-    .login-box button {
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #ffd700;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    }
+
+    .btn {
       width: 100%;
-      padding: 12px;
+      padding: 15px;
       border: none;
       border-radius: 8px;
       background: #ffd700;
@@ -97,20 +153,203 @@
       font-weight: bold;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+      margin-top: 10px;
     }
-    .login-box button:hover {
+
+    .btn:hover {
       background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
     }
-    footer {
+
+    .face-recognition-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .face-recognition-container.active {
+      display: flex;
+    }
+
+    .camera-view {
+      position: relative;
+      width: 800px;
+      height: 600px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid rgba(0, 255, 0, 0.3);
+    }
+
+    #video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .scan-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px) 0 0 / 40px 40px,
+        linear-gradient(0deg, rgba(0,255,0,0.1) 1px, transparent 1px) 0 0 / 40px 40px;
+      z-index: 5;
+    }
+
+    .scan-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #00ff00;
+      box-shadow: 0 0 10px #00ff00;
+      animation: scan 2s linear infinite;
+      z-index: 10;
+    }
+
+    .scan-circle {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border: 2px solid #00ff00;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 20px #00ff00;
+      z-index: 9;
+    }
+
+    .scan-circle::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      background: #00ff00;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      animation: rotate 2s linear infinite;
+    }
+
+    .capture-timer {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #00ff00;
+      font-size: 36px;
+      font-family: 'Orbitron', sans-serif;
+      z-index: 10;
+    }
+
+    .capture-progress {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 4px;
+      background: rgba(0, 255, 0, 0.2);
+      border-radius: 2px;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .capture-progress-bar {
+      width: 0%;
+      height: 100%;
+      background: #00ff00;
+      transition: width 0.1s linear;
+    }
+
+    .status {
+      color: #00ff00;
+      font-size: 18px;
+      margin-top: 20px;
       text-align: center;
-      padding: 20px;
-      background-color: #111;
-      border-top: 2px solid #ffd700;
-      color: #888;
+      font-family: 'Orbitron', sans-serif;
     }
+
+    .close-camera {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: #00ff00;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 20;
+    }
+
+    @keyframes scan {
+      0% { top: 0; }
+      100% { top: 100%; }
+    }
+
+    @keyframes rotate {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .register-link p {
+      color: #888;
+      margin-bottom: 15px;
+    }
+
+    .register-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: transparent;
+      border: 2px solid #ffd700;
+      color: #ffd700;
+      border-radius: 8px;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .register-btn:hover {
+      background: #ffd700;
+      color: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .login-tab {
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .login-tab.active {
+      display: block;
+    }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
@@ -126,23 +365,43 @@
         <li><a href="index.html">Ana Sayfa</a></li>
         <li><a href="piyasa.html">Piyasa</a></li>
         <li><a href="profilim.html">Profilim</a></li>
-        <li><a href="satin-al.html">Satın Al</a></li>
+        <li><a href="ai-asistan.html">AI Asistan<div class="menu-snowflake"></div></a></li>
         <li><a href="login.html" class="active">Giriş</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <div class="login-box">
-      <h2>Giriş Yap</h2>
-      <form>
-        <input type="text" placeholder="Kullanıcı Adı" required />
-        <input type="password" placeholder="Şifre" required />
-        <button type="submit">Giriş Yap</button>
-      </form>
-      <div class="links" style="display: flex; justify-content: space-between; margin-top: 15px;">
-        <a href="sifre-kurtar.html" style="color: #ffd700; text-decoration: none;">Şifremi Unuttum</a>
-        <a href="uye-ol.html" style="color: #ffd700; text-decoration: none;">Üye Ol</a>
+    <div class="container">
+      <div class="form-container">
+        <h2>Giriş Yap</h2>
+        <div class="login-tabs">
+          <button class="tab-btn active" data-tab="face">Yüz Tanıma ile Giriş</button>
+        </div>
+        
+        <div id="face-login" class="login-tab active">
+          <div class="face-recognition-container" id="face-recognition">
+            <button class="close-camera" id="close-camera">×</button>
+            <div class="camera-view">
+              <video id="video" width="800" height="600" autoplay muted></video>
+              <canvas id="overlay" width="800" height="600"></canvas>
+              <div class="scan-grid"></div>
+              <div class="scan-line"></div>
+              <div class="scan-circle"></div>
+              <div class="capture-timer">5</div>
+              <div class="capture-progress">
+                <div class="capture-progress-bar"></div>
+              </div>
+            </div>
+            <div id="status" class="status">Kamera başlatılıyor...</div>
+          </div>
+          <button id="startFaceLogin" class="btn">Yüz Tanıma ile Giriş Yap</button>
+        </div>
+
+        <div class="register-link">
+          <p>Henüz hesabınız yok mu?</p>
+          <a href="uye-ol.html" class="register-btn">Üye Ol</a>
+        </div>
       </div>
     </div>
   </main>
@@ -150,5 +409,175 @@
   <footer>
     <p>© 2025 QuantumTrade • Tüm Hakları Saklıdır</p>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const loginTabs = document.querySelectorAll('.login-tab');
+      let video;
+      let isCapturing = false;
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const tab = btn.dataset.tab;
+          
+          tabBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          loginTabs.forEach(t => t.classList.remove('active'));
+          document.getElementById(`${tab}-login`).classList.add('active');
+
+          if (tab === 'face') {
+            document.getElementById('face-recognition').classList.add('active');
+            initFaceRecognition();
+          } else {
+            stopVideo();
+            document.getElementById('face-recognition').classList.remove('active');
+          }
+        });
+      });
+
+      document.getElementById('startFaceLogin').addEventListener('click', function() {
+        document.getElementById('face-recognition').classList.add('active');
+        initFaceRecognition();
+      });
+
+      async function initFaceRecognition() {
+        const status = document.getElementById('status');
+        status.textContent = 'Modeller yükleniyor...';
+        
+        try {
+          await Promise.all([
+            faceapi.nets.tinyFaceDetector.loadFromUri('https://justadudewhohacks.github.io/face-api.js/models'),
+            faceapi.nets.faceLandmark68Net.loadFromUri('https://justadudewhohacks.github.io/face-api.js/models'),
+            faceapi.nets.faceRecognitionNet.loadFromUri('https://justadudewhohacks.github.io/face-api.js/models')
+          ]);
+          
+          video = document.getElementById('video');
+          const stream = await navigator.mediaDevices.getUserMedia({ 
+            video: { 
+              width: 800,
+              height: 600,
+              facingMode: 'user'
+            } 
+          });
+          video.srcObject = stream;
+          
+          video.onloadedmetadata = () => {
+            video.play();
+            status.textContent = 'Kamera başlatıldı, yüzünüzü görüntüleyin';
+            startFaceDetection();
+          };
+        } catch (error) {
+          console.error('Kamera başlatma hatası:', error);
+          status.textContent = 'Kamera başlatılamadı: ' + error.message;
+        }
+      }
+
+      async function startFaceDetection() {
+        const status = document.getElementById('status');
+        const timer = document.querySelector('.capture-timer');
+        const progressBar = document.querySelector('.capture-progress-bar');
+        let captureTime = 5;
+        let faceDetected = false;
+        
+        try {
+          const detections = await faceapi.detectAllFaces(
+            video,
+            new faceapi.TinyFaceDetectorOptions()
+          ).withFaceLandmarks().withFaceDescriptors();
+
+          if (detections.length > 0) {
+            if (!isCapturing) {
+              isCapturing = true;
+              faceDetected = true;
+              status.textContent = 'Yüz algılandı, tarama başlıyor...';
+              
+              const interval = setInterval(() => {
+                captureTime--;
+                timer.textContent = captureTime;
+                progressBar.style.width = `${(5 - captureTime) * 20}%`;
+                
+                if (captureTime <= 0) {
+                  clearInterval(interval);
+                  const faceDescriptor = Array.from(detections[0].descriptor);
+                  status.textContent = 'Yüz taraması tamamlandı, doğrulanıyor...';
+
+                  fetch('http://localhost:3000/api/auth/face-login', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ faceDescriptor })
+                  })
+                  .then(response => response.json())
+                  .then(result => {
+                    if (result.success) {
+                      status.textContent = 'Giriş başarılı! Yönlendiriliyorsunuz...';
+                      localStorage.setItem('token', result.token);
+                      localStorage.setItem('user', JSON.stringify(result.user));
+                      setTimeout(() => {
+                        window.location.href = 'index.html';
+                      }, 1500);
+                    } else {
+                      status.textContent = 'Bu yüz kayıtlı değil! Lütfen önce üye olun.';
+                      setTimeout(() => {
+                        document.getElementById('face-recognition').classList.remove('active');
+                        stopVideo();
+                        isCapturing = false;
+                        captureTime = 5;
+                        timer.textContent = captureTime;
+                        progressBar.style.width = '0%';
+                      }, 3000);
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Giriş hatası:', error);
+                    status.textContent = 'Sistem hatası! Lütfen daha sonra tekrar deneyin.';
+                    setTimeout(() => {
+                      document.getElementById('face-recognition').classList.remove('active');
+                      stopVideo();
+                      isCapturing = false;
+                      captureTime = 5;
+                      timer.textContent = captureTime;
+                      progressBar.style.width = '0%';
+                    }, 3000);
+                  });
+                }
+              }, 1000);
+            }
+          } else {
+            if (!faceDetected) {
+              status.textContent = 'Yüz algılanamadı, lütfen kameraya bakın';
+            }
+            setTimeout(startFaceDetection, 1000);
+          }
+        } catch (error) {
+          console.error('Yüz algılama hatası:', error);
+          status.textContent = 'Yüz algılama sırasında bir hata oluştu';
+          setTimeout(() => {
+            document.getElementById('face-recognition').classList.remove('active');
+            stopVideo();
+            isCapturing = false;
+            captureTime = 5;
+            timer.textContent = captureTime;
+            progressBar.style.width = '0%';
+          }, 3000);
+        }
+      }
+
+      document.getElementById('close-camera').addEventListener('click', function() {
+        document.getElementById('face-recognition').classList.remove('active');
+        stopVideo();
+      });
+
+      function stopVideo() {
+        if (video && video.srcObject) {
+          video.srcObject.getTracks().forEach(track => track.stop());
+        }
+        isCapturing = false;
+      }
+    });
+  </script>
 </body>
 </html>

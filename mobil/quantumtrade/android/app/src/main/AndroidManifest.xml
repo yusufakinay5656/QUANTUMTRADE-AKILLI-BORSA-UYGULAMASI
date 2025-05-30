@@ -1,6 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- İnternet izni -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Mikrofon izni -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!-- Ağ durumu izni -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <application
-        android:label="quantumtrade"
+        android:label="QuantumTrade"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

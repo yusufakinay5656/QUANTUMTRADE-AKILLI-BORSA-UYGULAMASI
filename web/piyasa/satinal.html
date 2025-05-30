@@ -1,193 +1,846 @@
-<!-- ✅ satin-al.html -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Satın Al | QuantumTrade</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background-color: #000;
-      color: #ffd700;
-    }
-    header {
-      background-color: #111;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 2px solid #ffd700;
-    }
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .logo img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-    }
-    nav ul {
-      display: flex;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      gap: 20px;
-    }
-    nav a {
-      text-decoration: none;
-      color: #ffd700;
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: #fff;
-    }
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: #ffd700;
-    }
-    .news-ticker {
-      background: #222;
-      overflow: hidden;
-      white-space: nowrap;
-      border-top: 1px solid #444;
-      border-bottom: 1px solid #444;
-    }
-    .ticker-content {
-      display: inline-block;
-      padding: 10px 0;
-      animation: slide 15s linear infinite;
-      color: #ffd700;
-    }
-    @keyframes slide {
-      from { transform: translateX(100%); }
-      to { transform: translateX(-100%); }
-    }
-    main {
-      padding: 60px 20px;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2rem;
-    }
-    .purchase-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .package {
-      background: #111;
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid #444;
-      text-align: center;
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-    .package:hover {
-      transform: translateY(-5px);
-      border-color: #ffd700;
-    }
-    .package h3 {
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-    }
-    .package p {
-      margin-bottom: 15px;
-      color: #ccc;
-    }
-    .package button {
-      padding: 10px 20px;
-      background: #ffd700;
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-    .package button:hover {
-      background: #fff;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #111;
-      border-top: 2px solid #ffd700;
-      color: #888;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumTrade - Yatırım Fırsatları</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+    <style>
+        /* web/piyasa/index.html dosyasından kopyalanan genel ve menü stilleri */
+        body {
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000; /* index.html body background */
+            color: #ffd700; /* index.html body color */
+        }
+        header {
+            background-color: #111;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #ffd700;
+            /* Flexbox hizalama için */
+            width: 100%;
+            box-sizing: border-box; /* Paddingin genişliği etkilemesini engelle */
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffd700;
+        }
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: 20px;
+            align-items: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #ffd700;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        nav a:hover, nav a:focus, nav a:active, nav a:visited {
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+            outline: none;
+        }
+        nav a.active {
+            color: #ffd700;
+            border-bottom: 2px solid #ffd700;
+        }
+        .mission {
+            color: #fff; /* Mottunun rengi index.html'deki gibi beyaz */
+            font-size: 1rem; /* Font boyutu ayarı */
+            margin-left: 10px; /* Logodan uzaklık */
+            /* Dikey hizalama için */
+            align-self: center;
+        }
+        /* web/piyasa/index.html dosyasındaki :root değişkenleri de eklendi */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #3498db;
+            --text-color: #ecf0f1;
+            --success-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --warning-color: #f1c40f;
+        }
+
+        /* Satinal.html'e özgü olup, menü ile çakışmayanlar */
+        .welcome-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+
+        .welcome-text {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .sub-text {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .analyze-btn {
+            background: linear-gradient(45deg, #ffd700, #ffa500);
+            color: #000;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .analyze-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .analyze-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .analyze-modal.active {
+            display: flex;
+        }
+
+        .countdown {
+            font-size: 8rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .crypto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .crypto-card {
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
+            border: 1px solid #ffd700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .crypto-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 215, 0, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .crypto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .crypto-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .price-info {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-change {
+            font-weight: bold;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .price-change.positive {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+        }
+
+        .price-change.negative {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+        }
+
+        .exchange-links {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .exchange-link {
+            background: #333;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .exchange-link:hover {
+            background: #444;
+            color: #ffd700;
+            transform: scale(1.05);
+        }
+
+        .live-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #4CAF50;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* index.html'deki user-menu ve user-dropdown stilleri eklendi */
+        .user-menu {
+            position: relative;
+            display: inline-block;
+            margin-left: 20px; /* İkon ve menü arasındaki boşluk */
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            background-color: #ffd700;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            top: 35px; /* Avatarın hemen altında */
+            right: 0;
+            background-color: #111;
+            border: 1px solid #ffd700;
+            border-radius: 8px;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
+        .user-dropdown a {
+            color: #ffd700 !important; /* Önemli: Menü linklerinin rengi */
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+            border-bottom: none; /* index.html'den nav a stili çakışmasını engelle */
+        }
+
+        .user-dropdown a:hover {
+            background-color: #222;
+            border-bottom: none; /* Hover durumda da alt çizgi olmasın */
+        }
+
+        .user-menu:hover .user-dropdown {
+            display: block;
+        }
+
+        /* Giriş Yapılması Gerekiyor Mesajı Stilleri */
+        .login-required {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh; /* Sayfanın büyük kısmını kapla */
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+            background: #1a1a1a; /* Koyu arka plan */
+            padding: 40px; /* İçeriden boşluk */
+            border-radius: 10px; /* Köşeleri yuvarla */
+            max-width: 600px; /* Maksimum genişlik */
+            margin: 50px auto; /* Dikeyde boşluk, yatayda ortala */
+            border: 1px solid #333; /* Hafif kenarlık */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Gölge efekti */
+        }
+        .login-required h2 {
+            font-size: 2rem; /* Başlık boyutu */
+            margin-bottom: 20px; /* Alt boşluk */
+            color: #ffd700; /* Altın sarısı renk */
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.3); /* Başlığa hafif parlama */
+        }
+        .login-required p {
+            font-size: 1.1rem; /* Paragraf boyutu */
+            margin-bottom: 30px; /* Alt boşluk */
+            color: #ccc; /* Açık gri renk */
+            line-height: 1.5; /* Satır aralığı */
+        }
+        .login-required a.btn {
+            display: inline-block; /* Buton gibi davranması için */
+            background: linear-gradient(45deg, #ffd700, #ffa500); /* Geçişli altın sarısı arka plan */
+            color: #000; /* Siyah metin rengi */
+            border: none; /* Kenarlık yok */
+            padding: 12px 25px; /* İç boşluk */
+            font-size: 1.1rem; /* Font boyutu */
+            font-weight: bold; /* Kalın metin */
+            border-radius: 50px; /* Tam yuvarlak köşeler */
+            text-decoration: none; /* Alt çizgi yok */
+            transition: all 0.3s ease; /* Yumuşak geçiş */
+            cursor: pointer; /* İmleç değişimi */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); /* Hafif parlama */
+        }
+        .login-required a.btn:hover {
+            transform: scale(1.05); /* Üzerine gelindiğinde hafif büyüme */
+            background: linear-gradient(45deg, #fff, #ffd700); /* Hoverda renk değişimi */
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.5); /* Hoverda daha belirgin parlama */
+            color: #000; /* Hoverda metin rengi */
+        }
+        /* Genel fadeIn animasyonu (zaten var olabilir, emin olmak için ekliyorum) */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Eğer .btn genel stili varsa ve çakışıyorsa */
+        .login-required .btn {
+            /* Yukarıdaki a.btn stillerini tekrar tanımlayarak öncelik verilebilir */
+        }
+
+        .ai-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .ai-title {
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ai-snowflake {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            animation: spin 8s linear infinite;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+        }
+
+        .ai-snowflake::before,
+        .ai-snowflake::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+                linear-gradient(90deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+                linear-gradient(0deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%);
+            background-size: 100% 100%;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .ai-snowflake::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes glow {
+            0% { filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5)); }
+            100% { filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8)); }
+        }
+
+        .menu-snowflake {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            position: relative;
+            animation: spin 8s linear infinite;
+            filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.5));
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        .menu-snowflake::before,
+        .menu-snowflake::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+                linear-gradient(90deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+                linear-gradient(0deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%);
+            background-size: 100% 100%;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .menu-snowflake::after {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="8ebfb1e03919fc6bae62be4740f0282e.jpg" alt="QuantumTrade Logo">
-      QuantumTrade <span class="mission">"The world is yours"</span>
+    <header>
+        <div class="logo">
+            <img src="../8ebfb1e03919fc6bae62be4740f0282e.jpg" alt="QuantumTrade Logo">
+            <span style="color: #ffd700;">QuantumTrade</span> <span class="mission">"The world is yours"</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="piyasa.html">Piyasa</a></li>
+                <li><a href="profilim.html">Profilim</a></li>
+                <li><a href="satinal.html">AI Asistan<div class="menu-snowflake"></div></a></li>
+                <li id="auth-section">
+                    <a href="login.html" class="login-link">Giriş Yap</a>
+                    <div class="user-menu" style="display: none;">
+                        <div class="user-avatar"></div>
+                        <div class="user-dropdown">
+                            <a href="profilim.html">Profilim</a>
+                            <a href="#" onclick="logout()">Çıkış Yap</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Giriş Yapılması Gerekiyor Mesajı -->
+    <div id="login-required-message" style="display: none;" class="login-required">
+        <h2>Bu sayfayı görüntülemek için giriş yapmalısınız.</h2>
+        <p>Lütfen devam etmek için giriş yapın veya kaydolun.</p>
+        <a href="login.html" class="btn">Giriş Yap</a>
     </div>
-    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-    <nav class="mobile-hidden">
-      <ul>
-        <li><a href="index.html">Ana Sayfa</a></li>
-        <li><a href="piyasa.html">Piyasa</a></li>
-        <li><a href="profilim.html">Profilim</a></li>
-        <li><a href="satin-al.html">Satın Al</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <div class="news-ticker">
-    <div class="ticker-content">
-      💳 QuantumCoin alımlarına özel %10 bonus! • Sınırlı süreli kampanyaları kaçırmayın • Güvenli ödeme, hızlı yatırım... 🚀
+    <!-- Ana İçerik -->
+    <div id="main-content">
+
+    <!-- Welcome Section -->
+    <div class="container">
+        <div class="welcome-section">
+            <h1 class="welcome-text">İyi Günler, Geleceğin Milyoneri!</h1>
+            <p class="sub-text">Dünyanın içindekilere sahip olmak istiyorsan hemen tıkla!</p>
+            <button class="analyze-btn" id="analyzeBtn">
+                <i class="fas fa-snowflake"></i>
+                QUANTUMTRADE AI
+            </button>
+        </div>
     </div>
-  </div>
 
-  <main>
-    <h2>QuantumCoin Satın Al</h2>
-    <div class="purchase-container">
-      <div class="package">
-        <h3>Başlangıç Paketi</h3>
-        <p>100 QuantumCoin - $10</p>
-        <button>Satın Al</button>
-      </div>
-      <div class="package">
-        <h3>Standart Paket</h3>
-        <p>500 QuantumCoin - $45</p>
-        <button>Satın Al</button>
-      </div>
-      <div class="package">
-        <h3>Profesyonel Paket</h3>
-        <p>1000 QuantumCoin - $85</p>
-        <button>Satın Al</button>
-      </div>
+    <!-- Analyze Modal -->
+    <div class="analyze-modal" id="analyzeModal">
+        <div class="countdown" id="countdown"></div>
     </div>
-  </main>
 
-  <footer>
-    <p>© 2025 QuantumTrade • Tüm Hakları Saklıdır</p>
-  </footer>
+    <!-- Crypto Grid -->
+    <div class="crypto-grid" id="cryptoGrid"></div>
 
-  <script>
-    function toggleMenu() {
-      const nav = document.querySelector("nav");
-      nav.classList.toggle("mobile-hidden");
-    }
-  </script>
+    <main>
+        <div class="container">
+            <div class="ai-assistant-container">
+                <!-- ... existing code ... -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const analyzeModal = document.getElementById('analyzeModal');
+        const countdown = document.getElementById('countdown');
+        const cryptoGrid = document.getElementById('cryptoGrid');
+
+        const exchanges = [
+            { name: 'Binance', url: symbol => `https://www.binance.com/en/trade/${symbol}_USDT` },
+            { name: 'KuCoin', url: symbol => `https://www.kucoin.com/trade/${symbol}-USDT` },
+            { name: 'Coinbase', url: symbol => `https://www.coinbase.com/price/${symbol.toLowerCase()}` },
+            { name: 'Paribu', url: symbol => `https://www.paribu.com/markets/${symbol}-usdt` },
+            { name: 'BTCTurk', url: url => `https://pro.btcturk.com/pro/${url.toUpperCase()}_USDT` }
+        ];
+
+        let updateIntervalId = null; // Güncelleme interval ID'sini saklamak için
+
+        // CoinGecko API'den veri çekme
+        async function fetchCryptoData() {
+            console.log('fetchCryptoData çağrıldı'); // Loglama
+            try {
+                // CoinGecko API kullanılacak
+                const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API yanıtı başarısız oldu: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('API\'den veri alındı:', data); // Gelen veriyi loglama
+                
+                if (!data || data.length === 0) {
+                    throw new Error('API boş veri döndürdü');
+                }
+
+                return data;
+            } catch (error) {
+                console.error('Veri çekme hatası:', error);
+                
+                // Alternatif API denemesi
+                try {
+                    const binanceResponse = await fetch('https://api.binance.com/api/v3/ticker/24hr');
+                    if (!binanceResponse.ok) {
+                        throw new Error('Binance API yanıtı başarısız');
+                    }
+                    
+                    const binanceData = await binanceResponse.json();
+                    const topCoins = binanceData
+                        .filter(coin => coin.symbol.endsWith('USDT'))
+                        .slice(0, 10)
+                        .map(coin => ({
+                            id: coin.symbol.toLowerCase(),
+                            symbol: coin.symbol.replace('USDT', ''),
+                            name: coin.symbol.replace('USDT', ''),
+                            current_price: parseFloat(coin.lastPrice),
+                            price_change_percentage_24h: parseFloat(coin.priceChangePercent),
+                            total_volume: parseFloat(coin.volume),
+                            market_cap: parseFloat(coin.quoteVolume)
+                        }));
+                    
+                    return topCoins;
+                } catch (binanceError) {
+                    console.error('Binance API hatası:', binanceError);
+                    cryptoGrid.innerHTML = '<div style="color: red; text-align: center; padding: 20px;">Canlı yatırım fırsatları alınamadı. Lütfen daha sonra tekrar deneyin.</div>';
+                    cryptoGrid.style.display = 'block';
+                    return null;
+                }
+            }
+        }
+
+        // Crypto kartlarını oluşturma
+        function createCryptoCard(coin) {
+            const card = document.createElement('div');
+            card.className = 'crypto-card';
+
+            // Fiyat değişim class'ını belirle
+            const priceChangeClass = coin.price_change_percentage_24h >= 0 ? 'positive' : 'negative';
+
+            card.innerHTML = `
+                <div class="crypto-name">
+                    <i class="fas fa-coins"></i> <!-- Varsayılan ikon, aşağıda güncellenecek -->
+                    ${coin.name}
+                </div>
+                <div class="price-info">
+                    <span>Fiyat:</span>
+                    <span>$${coin.current_price.toLocaleString()}</span>
+                </div>
+                <div class="price-info">
+                    <span>24s Değişim:</span>
+                    <span class="price-change ${priceChangeClass}">
+                        ${coin.price_change_percentage_24h.toFixed(2)}%
+                    </span>
+                </div>
+                <div class="price-info">
+                    <span>Hacim:</span>
+                    <span>$${coin.total_volume ? coin.total_volume.toLocaleString() : 'N/A'}</span> <!-- Hacim kontrolü -->
+                </div>
+                <div class="price-info">
+                    <span>Piyasa Değeri:</span>
+                    <span>$${coin.market_cap ? coin.market_cap.toLocaleString() : 'N/A'}</span> <!-- Piyasa değeri kontrolü -->
+                </div>
+                <div class="exchange-links">
+                    ${exchanges.map(exchange => {
+                        // Sembolü büyük harf yap ve USDT ekleyerek url oluştur (gerekirse)
+                        const symbolForUrl = coin.symbol.toUpperCase() + 'USDT';
+                        // KuCoin için symbol formatı genelde SYMBOL-USDT şeklindedir
+                        const kucoinSymbol = coin.symbol.toUpperCase() + '-USDT';
+
+                        let url = '#'; // Varsayılan boş URL
+                        if (exchange.name === 'Binance') url = `https://www.binance.com/en/trade/${symbolForUrl}`;
+                        else if (exchange.name === 'KuCoin') url = `https://www.kucoin.com/trade/${kucoinSymbol}`;
+                        else if (exchange.name === 'Coinbase') url = `https://www.coinbase.com/price/${coin.id.toLowerCase()}`;
+                        else if (exchange.name === 'Paribu') url = `https://www.paribu.com/markets/${symbolForUrl}`;
+                        else if (exchange.name === 'BTCTurk') url = `https://pro.btcturk.com/pro/${symbolForUrl}`;
+
+                        return `
+                            <a href="${url}" target="_blank" class="exchange-link">
+                                ${exchange.name}
+                            </a>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+
+            // Coin sembolüne göre ikon güncelleme
+            const iconElement = card.querySelector('.crypto-name i');
+            if (iconElement) {
+                if (coin.symbol.toLowerCase() === 'btc') iconElement.className = 'fab fa-bitcoin';
+                else if (coin.symbol.toLowerCase() === 'eth') iconElement.className = 'fab fa-ethereum';
+                 else if (coin.symbol.toLowerCase() === 'bnb') iconElement.className = 'fab fa-btc'; // BNB için geçici ikon
+                 else if (coin.symbol.toLowerCase() === 'xrp') iconElement.className = 'fas fa-coins'; // XRP için geçici ikon
+                 else if (coin.symbol.toLowerCase() === 'ada') iconElement.className = 'fas fa-coins'; // ADA için geçici ikon
+                 else if (coin.symbol.toLowerCase() === 'sol') iconElement.className = 'fas fa-coins'; // SOL için geçici ikon
+                // Diğer kriptolar için ikonlar eklenebilir
+                else iconElement.className = 'fas fa-coins'; // Varsayılan ikon
+            }
+
+            return card;
+        }
+
+        // Verileri güncelleme ve gösterme
+        async function updateCryptoData() {
+            console.log('updateCryptoData çağrıldı'); // Loglama
+            const data = await fetchCryptoData();
+            
+            if (data && data.length > 0) {
+                cryptoGrid.style.display = 'grid';
+                cryptoGrid.innerHTML = '';
+                data.forEach(coin => {
+                    const card = createCryptoCard(coin);
+                    cryptoGrid.appendChild(card);
+                });
+            } else {
+                if (!cryptoGrid.innerHTML.includes('Canlı yatırım fırsatları alınamadı')) {
+                    cryptoGrid.style.display = 'none';
+                }
+            }
+        }
+
+        // Düzenli güncelleme aralığını başlatma
+        function startUpdateInterval(intervalTime = 60000) { // Varsayılan 60 saniye (1 dakika)
+            console.log(`startUpdateInterval çağrıldı, ${intervalTime / 1000} saniyede bir güncellenecek`); // Loglama
+            // Mevcut interval varsa temizle
+            if (updateIntervalId !== null) {
+                clearInterval(updateIntervalId);
+                console.log('Önceki interval temizlendi:', updateIntervalId); // Loglama
+            }
+            // Yeni intervali başlat
+            updateIntervalId = setInterval(updateCryptoData, intervalTime);
+            console.log('Yeni interval başlatıldı:', updateIntervalId); // Loglama
+        }
+
+        // Analiz butonu tıklama
+        if (analyzeBtn) { // Butonun var olduğundan emin ol
+            analyzeBtn.addEventListener('click', async () => {
+                console.log('Analyze button tıklandı'); // Loglama
+
+                // Mevcut güncelleme aralığını durdur
+                if (updateIntervalId !== null) {
+                    clearInterval(updateIntervalId);
+                    updateIntervalId = null;
+                     console.log('Buton tıklanmasıyla interval durduruldu'); // Loglama
+                }
+
+                // Önce mevcut verileri/mesajları temizle ve grid'i gizle
+                cryptoGrid.innerHTML = '';
+                cryptoGrid.style.display = 'none'; // Veriler gelene kadar grid'i gizle
+
+                // Modal'ı göster
+                analyzeModal.classList.add('active');
+
+                // 3-2-1 geri sayım
+                countdown.textContent = ''; // Geri sayım başlamadan önce içeriği temizle
+                for (let i = 3; i > 0; i--) {
+                    countdown.textContent = i;
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                }
+
+                countdown.textContent = 'ANALİZ YAPILIYOR...';
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Modal'ı kapat
+                analyzeModal.classList.remove('active');
+
+                // Verileri yükle ve düzenli güncellemeyi başlat (dakikada bir)
+                await updateCryptoData(); // İlk veriyi çek ve göster
+
+                // Sadece veri başarıyla çekildiyse intervali başlat
+                const hasData = cryptoGrid.querySelectorAll('.crypto-card').length > 0;
+                if (hasData) {
+                     startUpdateInterval(60000); // Dakikada bir güncelleme başlat
+                }
+            });
+        } else {
+            console.error('Analyze button bulunamadı!'); // Buton bulunamazsa logla
+        }
+
+        // Sayfa yüklendiğinde kullanıcı kontrolü
+        document.addEventListener('DOMContentLoaded', () => {
+            const userString = localStorage.getItem('user');
+            const mainContent = document.getElementById('main-content');
+            const loginRequiredMessage = document.getElementById('login-required-message');
+            const loginLink = document.querySelector('.login-link'); // Header'daki giriş yap linki
+            const userMenu = document.querySelector('.user-menu'); // Header'daki kullanıcı menüsü
+            const userAvatar = document.querySelector('.user-avatar'); // Header'daki kullanıcı avatarı
+
+            if (userString) {
+                // Kullanıcı giriş yapmışsa
+                mainContent.style.display = 'block'; // Ana içeriği göster
+                loginRequiredMessage.style.display = 'none'; // Giriş yapılması gerekiyor mesajını gizle
+
+                // Header'daki giriş/çıkış menüsü
+                if (loginLink) loginLink.style.display = 'none';
+                if (userMenu) {
+                    userMenu.style.display = 'block';
+                    if (userAvatar) {
+                        const user = JSON.parse(userString);
+                         if (user && user.username) {
+                            userAvatar.textContent = user.username.charAt(0);
+                         } else {
+                            userAvatar.textContent = ''; // Kullanıcı adı yoksa boş bırak
+                         }
+                    }
+                }
+
+                // Sayfa yüklendiğinde buton olay dinleyicisini yeniden ekle ve interval'i temizle
+                 // Bu kısım mevcut script bloğunun içinde zaten var, burada sadece DOMContentLoaded içindeki mantığı tamamlıyoruz.
+                 // analyzeBtn olay dinleyicisi ve startUpdateInterval fonksiyonu sayfa yüklendiğinde tanımlanmış olacak.
+                 // Eğer sayfa yüklendiğinde otomatik veri çekme istenmiyorsa, updateCryptoData() çağrılmamalı.
+                 // Sadece butona basıldığında çalışması için interval başlatma bu scope'ta yapılmamalı.
+
+                 // Çıkış yapma fonksiyonu için event listener (header menüsü için)
+                const logoutButton = userMenu ? userMenu.querySelector('a[onclick="logout()"][href="#"]') : null;
+                if (logoutButton) {
+                    logoutButton.addEventListener('click', (e) => {
+                        e.preventDefault(); // Varsayılan link tıklamasını engelle
+                        logout();
+                    });
+                }
+
+            } else {
+                // Kullanıcı giriş yapmamışsa
+                mainContent.style.display = 'none'; // Ana içeriği gizle
+                loginRequiredMessage.style.display = 'flex'; // Giriş yapılması gerekiyor mesajını göster
+
+                // Header'daki giriş/çıkış menüsü
+                if (loginLink) loginLink.style.display = 'block';
+                if (userMenu) userMenu.style.display = 'none';
+
+                // Giriş yapılmadığında buton işlevselliğini devre dışı bırak veya yönlendir (isteğe bağlı)
+                if (analyzeBtn) {
+                    const analyzeBtnClone = analyzeBtn.cloneNode(true);
+                    analyzeBtn.parentNode.replaceChild(analyzeBtnClone, analyzeBtn);
+                    analyzeBtnClone.addEventListener('click', () => {
+                         window.location.href = 'login.html'; // Giriş sayfasına yönlendir
+                    });
+                }
+            }
+        });
+
+        // Çıkış yapma fonksiyonu (mevcut kod)
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        }
+
+    </script>
+    </div>
 </body>
 </html>

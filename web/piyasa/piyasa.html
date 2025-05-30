@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Piyasa | QuantumTrade</title>
+  <title>Piyasa - QuantumTrade</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -86,108 +86,980 @@
       from { transform: translateX(100%); }
       to { transform: translateX(-100%); }
     }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .chart-container {
+      height: 800px;
+      margin: 20px 0;
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 40px;
+      border: 2px solid #333;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+      animation: glow 2s infinite alternate;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
+        border-color: #333;
+      }
+      to {
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        border-color: #ffd700;
+      }
+    }
+    .ai-analysis {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      border: 2px solid #333;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+      animation: glow 2s infinite alternate;
+    }
+    .ai-analysis h3 {
+      color: #ffd700;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+    .ai-content {
+      color: #fff;
+      line-height: 1.6;
+      font-size: 16px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+    }
+    .update-time {
+      text-align: right;
+      font-size: 12px;
+      color: #666;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .update-indicator {
+      width: 8px;
+      height: 8px;
+      background: #ffd700;
+      border-radius: 50%;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .thinking-animation {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 20px 0;
+    }
+    .thinking-animation .dot {
+      width: 12px;
+      height: 12px;
+      background: #ffd700;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out;
+    }
+    .thinking-animation .dot:nth-child(1) { animation-delay: -0.32s; }
+    .thinking-animation .dot:nth-child(2) { animation-delay: -0.16s; }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+    .user-menu {
+      position: relative;
+      display: inline-block;
+      margin-left: 20px;
+    }
+
+    .user-avatar {
+      width: 30px;
+      height: 30px;
+      background-color: #ffd700;
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .user-dropdown {
+      display: none;
+      position: absolute;
+      top: 35px;
+      right: 0;
+      background-color: #111;
+      border: 1px solid #ffd700;
+      border-radius: 8px;
+      min-width: 120px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+
+    .user-dropdown a {
+      color: #ffd700 !important;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.3s ease;
+      border-bottom: none;
+    }
+
+    .user-dropdown a:hover {
+      background-color: #222;
+      border-bottom: none;
+    }
+
+    .user-menu:hover .user-dropdown {
+      display: block;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .login-btn, .register-btn {
+      padding: 8px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn {
+      background: transparent;
+      border: 2px solid #ffd700;
+      color: #ffd700;
+    }
+
+    .register-btn {
+      background: #ffd700;
+      border: 2px solid #ffd700;
+      color: #000;
+    }
+
+    .login-btn:hover {
+      background: rgba(255, 215, 0, 0.1);
+    }
+
+    .register-btn:hover {
+      background: #ffed4a;
+      border-color: #ffed4a;
+    }
+
+    .user-avatar {
+      width: 35px;
+      height: 35px;
+      background: #ffd700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .user-avatar:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    #tradingview_widget {
+      width: 100%;
+      height: 700px;
+    }
+
+    .live-coins {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 18px;
+      justify-content: center;
+    }
+
+    .live-coin-card {
+      min-width: 120px;
+      max-width: 180px;
+      background: #181818;
+      border-radius: 10px;
+      border: 2px solid #333;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1em;
+      font-weight: bold;
+      text-align: center;
+      padding: 14px 10px 10px 10px;
+      box-shadow: 0 2px 12px #000a;
+      position: relative;
+      animation: blink-green 1s infinite alternate;
+      transition: border-color 0.3s;
+    }
+
+    .live-coin-card.red {
+      animation: blink-red 1s infinite alternate;
+      border-color: #f44336;
+    }
+
+    .live-coin-card.green {
+      animation: blink-green 1s infinite alternate;
+      border-color: #4CAF50;
+    }
+
+    @keyframes blink-green {
+      0% { box-shadow: 0 0 10px #4CAF50, 0 0 0 #fff0; }
+      100% { box-shadow: 0 0 30px #4CAF50, 0 0 10px #fff3; }
+    }
+
+    @keyframes blink-red {
+      0% { box-shadow: 0 0 10px #f44336, 0 0 0 #fff0; }
+      100% { box-shadow: 0 0 30px #f44336, 0 0 10px #fff3; }
+    }
+
+    .market-data {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 2px solid #333;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+    }
+
+    .market-data h3 {
+      color: #ffd700;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .crypto-items {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+    }
+
+    .crypto-item {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      flex: 1;
+      transition: transform 0.3s ease;
+    }
+
+    .crypto-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .crypto-name {
+      color: #ffd700;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .crypto-price {
+      color: #fff;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .crypto-change {
+      font-size: 16px;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .crypto-change.positive {
+      color: #4CAF50;
+    }
+
+    .crypto-change.negative {
+      color: #f44336;
+    }
+
+    .news-section {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      border: 2px solid #333;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+    }
+
+    .news-section h3 {
+      color: #ffd700;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .news-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .news-item {
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #333;
+    }
+
+    .news-item h4 {
+      color: #ffd700;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .news-item p {
+      color: #fff;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .news-item a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .news-item a:hover {
+      color: #ffed4a;
+    }
+
+    .update-btn {
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-left: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .update-btn:hover {
+      background: linear-gradient(45deg, #fff, #ffd700);
+      transform: scale(1.05);
+    }
+
+    .update-btn:active {
+      transform: scale(0.95);
+    }
+
+    .btn-icon {
+      font-size: 18px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .typing-animation {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .analysis-text {
+      position: relative;
+      margin: 15px 0;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      border-left: 3px solid #ffd700;
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: slideIn 0.5s forwards;
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .typing-cursor {
+      position: absolute;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: #ffd700;
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .update-indicator {
+      width: 8px;
+      height: 8px;
+      background: #ffd700;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .updating {
+      animation: updating 1s infinite;
+    }
+
+    @keyframes updating {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Kartanesi için yeni stiller */
+    .ai-title-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .ai-title {
+      color: #ffd700;
+      font-size: 24px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .ai-snowflake {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      animation: spin 8s linear infinite;
+      filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    }
+
+    .ai-snowflake::before,
+    .ai-snowflake::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(45deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+        linear-gradient(-45deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+        linear-gradient(90deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%),
+        linear-gradient(0deg, transparent 45%, #ffd700 45%, #ffd700 55%, transparent 55%);
+      background-size: 100% 100%;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .ai-snowflake::after {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .login-required {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in-out;
+      background: #1a1a1a;
+      padding: 40px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 50px auto;
+      border: 1px solid #333;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .login-required h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #ffd700;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+    }
+
+    .login-required p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+    .login-required a.btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #ffd700, #ffa500);
+      color: #000;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .login-required a.btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(45deg, #fff, #ffd700);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+      color: #000;
+    }
   </style>
 </head>
-<body class="page-piyasa">
+<body>
   <header>
     <div class="logo">
       <img src="8ebfb1e03919fc6bae62be4740f0282e.jpg" alt="QuantumTrade Logo">
-      <span>QuantumTrade</span>
-      <span class="mission">"The world is yours"</span>
+      <span style="color: #ffd700;">QuantumTrade</span> <span class="mission">"The world is yours"</span>
     </div>
     <nav>
       <ul>
         <li><a href="index.html">Ana Sayfa</a></li>
         <li><a href="piyasa.html" class="active">Piyasa</a></li>
         <li><a href="profilim.html">Profilim</a></li>
-        <li><a href="satin-al.html">Satın Al</a></li>
-        <li><a href="login.html">Giriş Yap</a></li>
+        <li><a href="satinal.html">AI Asistan<div class="menu-snowflake"></div></a></li>
+        <li id="auth-section">
+          <a href="login.html" class="login-link">Giriş Yap</a>
+          <div class="user-menu" style="display: none;">
+            <div class="user-avatar"></div>
+            <div class="user-dropdown">
+              <a href="profilim.html">Profilim</a>
+              <a href="#" onclick="logout()">Çıkış Yap</a>
+            </div>
+          </div>
+        </li>
       </ul>
     </nav>
   </header>
+
   <div class="news-ticker">
-    <div class="ticker-content">
-      📢 QuantumTrade'e Hoş Geldiniz! • 🚀 Anlık piyasa analizleri • 💼 Güvenli yatırımın adresi...
+    <div class="ticker-content" id="ticker-content">
+      <!-- Ticker içeriği JavaScript ile doldurulacak -->
     </div>
   </div>
 
-  <main style="padding: 20px; animation: fadeIn 1.5s ease;">
-    <div class="section">
-      <h2 style="text-align:center; color: #ffd700; font-family: 'Orbitron', sans-serif;">Kripto Para Fiyat Grafikleri</h2>
+  <div class="container">
+    <!-- Giriş Yapılması Gerekiyor Mesajı -->
+    <div id="login-required-message" style="display: none;" class="login-required">
+      <h2>Bu sayfayı görüntülemek için giriş yapmalısınız.</h2>
+      <p>Lütfen devam etmek için giriş yapın veya kaydolun.</p>
+      <a href="login.html" class="btn">Giriş Yap</a>
+    </div>
 
-      <div class="chart-row" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-top: 40px;">
-        <div style="width: 350px;">
-          <h3 style="text-align:center; color: #ffd700; font-family: 'Orbitron', sans-serif;">Bitcoin (BTC)</h3>
-          <div style="position: relative; height: 180px;">
-            <canvas id="btcChart"></canvas>
-          </div>
+    <!-- Ana İçerik -->
+    <div id="main-content">
+      <!-- Canlı Coin Kartları -->
+      <div class="live-coins" id="live-coins">
+        <!-- Coin kartları JavaScript ile doldurulacak -->
+      </div>
+
+      <!-- TradingView Grafik Widget'ı -->
+      <div class="chart-container">
+        <div id="tradingview_widget"></div>
+      </div>
+
+      <!-- AI Analiz Bölümü -->
+      <div class="section">
+        <div class="ai-title-container">
+          <div class="ai-snowflake"></div>
+          <h2 class="ai-title">QUANTUMTRADE AI</h2>
+          <div class="ai-snowflake"></div>
         </div>
-
-        <div style="width: 350px;">
-          <h3 style="text-align:center; color: #ffd700; font-family: 'Orbitron', sans-serif;">Ethereum (ETH)</h3>
-          <div style="position: relative; height: 180px;">
-            <canvas id="ethChart"></canvas>
+        <div class="ai-analysis">
+          <h3>Yapay Zeka Analizi</h3>
+          <div class="ai-content" id="ai-commentary">
+            <div class="thinking-animation">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+            <p class="loading-text">QuantumTrade AI teknik analiz yapıyor...</p>
           </div>
-        </div>
-
-        <div style="width: 350px;">
-          <h3 style="text-align:center; color: #ffd700; font-family: 'Orbitron', sans-serif;">Ripple (XRP)</h3>
-          <div style="position: relative; height: 180px;">
-            <canvas id="xrpChart"></canvas>
+          <div class="update-time">
+            <span class="update-indicator"></span>
+            Son güncelleme: <span id="last-update">-</span>
+            <button class="update-btn" onclick="updateAICommentary()">
+              <span class="btn-text">Güncelle</span>
+              <span class="btn-icon">⟳</span>
+            </button>
           </div>
         </div>
       </div>
-
     </div>
-  </main>
+  </div>
 
-  <footer>
-    <p style="text-align: center; color: #ccc; font-family: 'Orbitron', sans-serif;">© 2025 <span style="color:#ffd700;">QuantumTrade</span> • Tüm Hakları Saklıdır</p>
-  </footer>
-
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
   <script>
-    const labels = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+    // Kullanıcı kontrolü ve avatar gösterimi
+    function checkUser() {
+      const userString = localStorage.getItem('user');
+      const loginLink = document.querySelector('.login-link');
+      const userMenu = document.querySelector('.user-menu');
+      const userAvatar = document.querySelector('.user-avatar');
+      const mainContent = document.getElementById('main-content');
+      const loginRequiredMessage = document.getElementById('login-required-message');
 
-    const createChart = (id, label, data) => {
-      const ctx = document.getElementById(id).getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: label,
-            data: data,
-            backgroundColor: 'rgba(255, 215, 0, 0.1)',
-            borderColor: '#ffd700',
-            borderWidth: 2,
-            tension: 0.4,
-            pointRadius: 3
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            x: { ticks: { color: '#fff' }, grid: { color: 'rgba(255,255,255,0.1)' } },
-            y: { ticks: { color: '#fff' }, grid: { color: 'rgba(255,255,255,0.1)' } }
-          },
-          plugins: {
-            legend: { labels: { color: '#fff' } }
-          }
-        }
-      });
-    };
-
-    createChart('btcChart', 'BTC/USD', [67000, 68000, 66000, 69000, 70000, 70500, 71200]);
-    createChart('ethChart', 'ETH/USD', [3000, 3100, 3050, 3200, 3250, 3300, 3350]);
-    createChart('xrpChart', 'XRP/USD', [0.58, 0.60, 0.59, 0.61, 0.62, 0.63, 0.64]);
-  </script>
-
-  <style>
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      if (userString) {
+        const user = JSON.parse(userString);
+        loginLink.style.display = 'none';
+        userMenu.style.display = 'block';
+        userAvatar.textContent = user.username.charAt(0);
+        
+        // Ana içeriği göster, giriş mesajını gizle
+        mainContent.style.display = 'block';
+        loginRequiredMessage.style.display = 'none';
+      } else {
+        loginLink.style.display = 'block';
+        userMenu.style.display = 'none';
+        
+        // Ana içeriği gizle, giriş mesajını göster
+        mainContent.style.display = 'none';
+        loginRequiredMessage.style.display = 'flex';
+      }
     }
-  </style>
+
+    // Çıkış yapma fonksiyonu
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = 'login.html';
+    }
+
+    // Canlı coin verilerini güncelle
+    function updateLiveCoins() {
+      // Kullanıcı giriş yapmamışsa güncelleme yapma
+      if (!localStorage.getItem('user')) {
+        return;
+      }
+
+      const coins = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'ADAUSDT', 'DOGEUSDT'];
+      const liveCoinsContainer = document.getElementById('live-coins');
+      
+      coins.forEach(symbol => {
+        fetch(`https://api.binance.com/api/v3/ticker/24hr?symbol=${symbol}`)
+          .then(response => response.json())
+          .then(data => {
+            const priceChange = parseFloat(data.priceChangePercent);
+            const cardClass = priceChange >= 0 ? 'green' : 'red';
+            const price = parseFloat(data.lastPrice).toFixed(2);
+            const change = priceChange.toFixed(2);
+            
+            const card = document.createElement('div');
+            card.className = `live-coin-card ${cardClass}`;
+            card.innerHTML = `
+              <div>${symbol.replace('USDT', '')}</div>
+              <div>$${price}</div>
+              <div>${change}%</div>
+            `;
+            
+            const existingCard = liveCoinsContainer.querySelector(`[data-symbol="${symbol}"]`);
+            if (existingCard) {
+              existingCard.replaceWith(card);
+            } else {
+              liveCoinsContainer.appendChild(card);
+            }
+            card.setAttribute('data-symbol', symbol);
+          })
+          .catch(error => console.error(`${symbol} verisi çekilemedi:`, error));
+      });
+    }
+
+    // AI yorumunu güncelle
+    function updateAICommentary() {
+      // Kullanıcı giriş yapmamışsa güncelleme yapma
+      if (!localStorage.getItem('user')) {
+        return;
+      }
+
+      const commentaryElement = document.getElementById('ai-commentary');
+      const lastUpdateElement = document.getElementById('last-update');
+      const updateBtn = document.querySelector('.update-btn');
+      const btnIcon = document.querySelector('.btn-icon');
+      
+      // Güncelleme animasyonunu başlat
+      updateBtn.disabled = true;
+      btnIcon.classList.add('updating');
+      
+      // Yükleniyor animasyonunu göster
+      commentaryElement.innerHTML = `
+        <div class="thinking-animation">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <p class="loading-text">QuantumTrade AI teknik analiz yapıyor...</p>
+      `;
+
+      // Binance API'den veri al
+      const symbol = 'BTCUSDT';
+      
+      fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1h&limit=100`)
+        .then(response => response.json())
+        .then(data => {
+          // RSI ve MACD hesaplamaları...
+          const closes = data.map(candle => parseFloat(candle[4]));
+          const rsi = calculateRSI(closes);
+          const currentRSI = rsi[rsi.length - 1];
+          
+          const macd = calculateMACD(closes);
+          const currentMACD = macd.macdLine[macd.macdLine.length - 1];
+          const currentSignal = macd.signalLine[macd.signalLine.length - 1];
+          const currentHistogram = macd.histogram[macd.histogram.length - 1];
+
+          // Yapay zeka yorumu oluştur
+          let aiComment = `
+            <div class="ai-comment">
+              <h4>QuantumTrade AI Teknik Analiz</h4>
+              <div class="typing-animation">
+                <p class="analysis-text">RSI Analizi: ${getRSIAnalysis(currentRSI)}</p>
+                <p class="analysis-text">MACD Analizi: ${getMACDAnalysis(currentMACD, currentSignal, currentHistogram)}</p>
+                <p class="analysis-text">Genel Trend Analizi: ${getTrendAnalysis(currentRSI, currentMACD, currentSignal)}</p>
+                <p class="analysis-text">Yatırım Tavsiyesi: ${getInvestmentAdvice(currentRSI, currentMACD, currentSignal)}</p>
+              </div>
+            </div>
+          `;
+
+          // Analizi göster
+          if (commentaryElement) {
+            commentaryElement.innerHTML = aiComment;
+            
+            // Yazı animasyonu için
+            const typingElements = commentaryElement.querySelectorAll('.analysis-text');
+            typingElements.forEach((element, index) => {
+              const text = element.textContent;
+              element.textContent = '';
+              element.style.overflow = 'hidden';
+              element.style.whiteSpace = 'nowrap';
+              element.style.borderRight = '2px solid #ffd700';
+              element.style.width = '0';
+              
+              // Her cümle için gecikme ekle
+              setTimeout(() => {
+                let i = 0;
+                const typeWriter = () => {
+                  if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    element.style.width = (i + 1) * 8 + 'px';
+                    i++;
+                    setTimeout(typeWriter, 30);
+                  } else {
+                    element.style.borderRight = 'none';
+                    element.style.whiteSpace = 'normal';
+                    element.style.width = '100%';
+                  }
+                };
+                typeWriter();
+              }, index * 1000); // Her cümle arasında 1 saniye bekle
+            });
+          }
+
+          if (lastUpdateElement) {
+            lastUpdateElement.textContent = new Date().toLocaleTimeString('tr-TR');
+          }
+
+          // Güncelleme animasyonunu durdur
+          updateBtn.disabled = false;
+          btnIcon.classList.remove('updating');
+        })
+        .catch(error => {
+          console.error('AI yorumu çekme hatası:', error);
+          commentaryElement.innerHTML = `
+            <div class="error-message">
+              <h4>Teknik analiz yüklenirken bir hata oluştu</h4>
+              <p>Lütfen aşağıdaki kontrolleri yapın:</p>
+              <ul>
+                <li>İnternet bağlantınızı kontrol edin</li>
+                <li>Binance API'sine erişiminizi kontrol edin</li>
+                <li>Daha sonra tekrar deneyin</li>
+              </ul>
+              <button class="btn" onclick="updateAICommentary()">Tekrar Dene</button>
+            </div>
+          `;
+          
+          // Hata durumunda güncelleme animasyonunu durdur
+          updateBtn.disabled = false;
+          btnIcon.classList.remove('updating');
+        });
+    }
+
+    // RSI hesaplama fonksiyonu
+    function calculateRSI(prices, period = 14) {
+      let gains = 0;
+      let losses = 0;
+      let rsi = [];
+
+      // İlk RSI değeri için
+      for (let i = 1; i < period + 1; i++) {
+        const difference = prices[i] - prices[i - 1];
+        if (difference >= 0) {
+          gains += difference;
+        } else {
+          losses -= difference;
+        }
+      }
+
+      let avgGain = gains / period;
+      let avgLoss = losses / period;
+      let rs = avgGain / avgLoss;
+      rsi.push(100 - (100 / (1 + rs)));
+
+      // Kalan değerler için
+      for (let i = period + 1; i < prices.length; i++) {
+        const difference = prices[i] - prices[i - 1];
+        avgGain = ((avgGain * (period - 1)) + (difference > 0 ? difference : 0)) / period;
+        avgLoss = ((avgLoss * (period - 1)) + (difference < 0 ? -difference : 0)) / period;
+        rs = avgGain / avgLoss;
+        rsi.push(100 - (100 / (1 + rs)));
+      }
+
+      return rsi;
+    }
+
+    // MACD hesaplama fonksiyonu
+    function calculateMACD(prices, fastPeriod = 12, slowPeriod = 26, signalPeriod = 9) {
+      const ema12 = calculateEMA(prices, fastPeriod);
+      const ema26 = calculateEMA(prices, slowPeriod);
+      const macdLine = ema12.map((value, index) => value - ema26[index]);
+      const signalLine = calculateEMA(macdLine, signalPeriod);
+      const histogram = macdLine.map((value, index) => value - signalLine[index]);
+
+      return { macdLine, signalLine, histogram };
+    }
+
+    // EMA hesaplama fonksiyonu
+    function calculateEMA(prices, period) {
+      const k = 2 / (period + 1);
+      let ema = [prices[0]];
+      
+      for (let i = 1; i < prices.length; i++) {
+        ema.push(prices[i] * k + ema[i - 1] * (1 - k));
+      }
+      
+      return ema;
+    }
+
+    // RSI analizi
+    function getRSIAnalysis(rsi) {
+      if (rsi > 70) return "Aşırı alım bölgesinde (RSI: " + rsi.toFixed(2) + "). Satış fırsatı oluşabilir.";
+      if (rsi < 30) return "Aşırı satım bölgesinde (RSI: " + rsi.toFixed(2) + "). Alım fırsatı oluşabilir.";
+      if (rsi > 50) return "Yükseliş trendinde (RSI: " + rsi.toFixed(2) + "). Momentum güçlü.";
+      return "Düşüş trendinde (RSI: " + rsi.toFixed(2) + "). Momentum zayıf.";
+    }
+
+    // MACD analizi
+    function getMACDAnalysis(macd, signal, histogram) {
+      if (macd > signal && histogram > 0) {
+        return "MACD sinyal çizgisinin üzerinde ve histogram pozitif. Yükseliş trendi güçlü.";
+      } else if (macd < signal && histogram < 0) {
+        return "MACD sinyal çizgisinin altında ve histogram negatif. Düşüş trendi güçlü.";
+      } else if (macd > signal && histogram < 0) {
+        return "MACD sinyal çizgisinin üzerinde ancak histogram negatif. Trend zayıflıyor.";
+      } else {
+        return "MACD sinyal çizgisinin altında ancak histogram pozitif. Trend güçleniyor.";
+      }
+    }
+
+    // Trend analizi
+    function getTrendAnalysis(rsi, macd, signal) {
+      const trendStrength = Math.abs(macd - signal);
+      if (rsi > 50 && macd > signal) {
+        return "Güçlü yükseliş trendi. RSI ve MACD yükselişi destekliyor.";
+      } else if (rsi < 50 && macd < signal) {
+        return "Güçlü düşüş trendi. RSI ve MACD düşüşü destekliyor.";
+      } else if (rsi > 50 && macd < signal) {
+        return "Trend zayıflıyor. RSI yükselişi gösterirken MACD düşüş sinyali veriyor.";
+      } else {
+        return "Trend güçleniyor. RSI düşüşü gösterirken MACD yükseliş sinyali veriyor.";
+      }
+    }
+
+    // Yatırım tavsiyesi
+    function getInvestmentAdvice(rsi, macd, signal) {
+      if (rsi > 70 && macd < signal) {
+        return "GÜÇLÜ SATIM - Aşırı alım bölgesi ve MACD düşüş sinyali.";
+      } else if (rsi < 30 && macd > signal) {
+        return "GÜÇLÜ ALIM - Aşırı satım bölgesi ve MACD yükseliş sinyali.";
+      } else if (rsi > 60 && macd > signal) {
+        return "SATIM - Yükseliş trendi zayıflıyor.";
+      } else if (rsi < 40 && macd < signal) {
+        return "ALIM - Düşüş trendi zayıflıyor.";
+      } else {
+        return "BEKLE - Trend belirsiz, daha net sinyaller bekleyin.";
+      }
+    }
+
+    // Sayfa yüklendiğinde kullanıcı kontrolü yap
+    document.addEventListener('DOMContentLoaded', () => {
+      checkUser();
+      updateLiveCoins();
+      updateAICommentary();
+    });
+
+    // TradingView Widget'ı
+    new TradingView.widget({
+      "width": "100%",
+      "height": 700,
+      "symbol": "BINANCE:BTCUSDT",
+      "interval": "1",
+      "timezone": "Etc/UTC",
+      "theme": "dark",
+      "style": "1",
+      "locale": "tr",
+      "toolbar_bg": "#f1f3f6",
+      "enable_publishing": false,
+      "allow_symbol_change": true,
+      "container_id": "tradingview_widget",
+      "save_image": false,
+      "hideideas": true,
+      "studies": ["RSI@tv-basicstudies", "MACD@tv-basicstudies", "BB@tv-basicstudies"]
+    });
+  </script>
 </body>
 </html>
